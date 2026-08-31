@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/showcase/boluobao-hero-16x9.webp" width="100%" alt="Boluobao 菠萝包：纸上有风，也有故事">
+  <img src="docs/showcase/boluobao-hero-16x9.webp" width="100%" alt="Boluobao 菠萝包：文字、图片与数据沿纸上风线转化为食物、场景和景色视觉故事">
 </p>
 
 <p align="center">
