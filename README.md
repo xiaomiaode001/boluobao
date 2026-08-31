@@ -14,6 +14,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/code-Apache--2.0-5B778A" alt="Apache 2.0"></a>
   <a href="LICENSES/CC-BY-4.0.txt"><img src="https://img.shields.io/badge/test%20images-CC%20BY%204.0-CB8A4A" alt="CC BY 4.0"></a>
   <img src="https://img.shields.io/badge/Codex-Skill-6E7555" alt="Codex Skill">
+  <img src="https://img.shields.io/badge/Claude%20Code-Skill-D47B3B" alt="Claude Code Skill">
 </p>
 
 <p align="center">
@@ -31,7 +32,7 @@
 
 ## 中文介绍
 
-**Boluobao** 是一个可隐式调用的 Codex Skill，为创作者、自媒体作者、教育工作者与独立团队提供稳定、可复用的风格化视觉设计。它能理解文章结构与叙事核心，自动规划适合配图的段落和最少图片数量；也能生成社媒封面、中英文手写便签、食物与场景插画、人物近景、轻量图表和表格，或将用户提供的照片重构成统一的手账式视觉。
+**Boluobao** 是一个兼容 Codex 与 Claude Code 的可调用 Skill，为创作者、自媒体作者、教育工作者与独立团队提供稳定、可复用的风格化视觉设计。它能理解文章结构与叙事核心，自动规划适合配图的段落和最少图片数量；也能生成社媒封面、中英文手写便签、食物与场景插画、人物近景、轻量图表和表格，或将用户提供的照片重构成统一的手账式视觉。
 
 它不是一个只会套滤镜的提示词，而是一套包含内容规划、构图、文字校对、数据保护、质量评分和交付规则的完整工作流。视觉语言由暖色无涂布纸、深色墨线、半透明彩铅、留白、手写批注和受控的不规则感组成。
 
@@ -39,7 +40,7 @@
 
 ## English Introduction
 
-**Boluobao** is an implicitly invokable Codex Skill for creators, social-media publishers, educators, and independent teams who need a consistent, reusable visual language. It reads the structure and narrative core of an article, selects the paragraphs that benefit from illustration, and proposes the smallest useful image set. It can also create social covers, Chinese and English handwritten notes, food and scene illustrations, close-up characters, compact charts and tables, or reconstruct a supplied photograph in a coherent journal-like style.
+**Boluobao** is an invokable Skill for Codex and Claude Code, built for creators, social-media publishers, educators, and independent teams who need a consistent, reusable visual language. It reads the structure and narrative core of an article, selects the paragraphs that benefit from illustration, and proposes the smallest useful image set. It can also create social covers, Chinese and English handwritten notes, food and scene illustrations, close-up characters, compact charts and tables, or reconstruct a supplied photograph in a coherent journal-like style.
 
 This is more than a filter prompt. Boluobao combines content planning, composition, text verification, data protection, quality scoring, and delivery rules in one workflow. Its visual language uses warm uncoated paper, dark ink contours, translucent colored pencil, purposeful whitespace, handwritten annotations, and controlled imperfection.
 
@@ -146,6 +147,8 @@ The following cases pair an original scene with a Boluobao reconstruction to dem
 
 ## 快速开始 / Quick Start
 
+### Codex
+
 将仓库克隆或复制到 Codex Skills 目录，并确保目录名为 `boluobao`：
 
 Clone or copy the repository into the Codex Skills directory and keep the folder name `boluobao`:
@@ -157,6 +160,29 @@ Clone or copy the repository into the Codex Skills directory and keep the folder
 安装后可以直接自然语言调用，也可以显式使用 `$boluobao`。`agents/openai.yaml` 已启用隐式调用并配置菠萝包品牌图标。
 
 After installation, use natural-language requests or invoke `$boluobao` explicitly. `agents/openai.yaml` enables implicit invocation and configures the pineapple-bun brand icon.
+
+### Claude Code
+
+在仓库根目录启动 Claude Code 时，已提交的 `.claude/skills/boluobao/SKILL.md` 会提供项目级入口；可以直接使用 `/boluobao`，也可以让 Claude Code 根据描述自动调用。这个轻量入口始终读取根目录的主 `SKILL.md`，不会维护第二套画风规则。
+
+When Claude Code starts in the repository root, the committed `.claude/skills/boluobao/SKILL.md` provides a project-scoped entry point. Invoke `/boluobao` directly or let Claude Code select it from the task description. The lightweight bridge always reads the canonical root `SKILL.md`, so there is no second style definition to drift.
+
+如需在所有项目中使用，把当前主包同步到个人 Skills 目录：
+
+For personal use across projects, synchronize the canonical package into the user Skills directory:
+
+```powershell
+python -X utf8 scripts/sync_claude_skill.py --install-user
+python -X utf8 scripts/sync_claude_skill.py --install-user --check
+```
+
+目标目录为 `~/.claude/skills/boluobao/`。每次拉取新版后重新运行第一条命令即可同步；脚本只覆盖自己清单中管理的文件，并拒绝覆盖未受管理的非空目录。如果 Claude Code 启动时还不存在顶层 Skills 目录，首次安装后重启一次会话。
+
+The target is `~/.claude/skills/boluobao/`. Re-run the first command after pulling an update; the synchronizer only overwrites files in its own manifest and refuses unmanaged non-empty targets. If no top-level Skills directory existed when Claude Code started, restart the session once after the first install.
+
+> Claude Code 兼容层不假设特定图像服务。实际生成图片需要当前 Claude Code 环境配置可用的图像生成或编辑工具；没有像素生成工具时，Skill 仍会完成内容映射、构图、锁定文字、生产提示和校验方案，但不会声称已生成文件。
+>
+> The Claude Code adapter is tool-neutral. Pixel output requires an image-generation or image-editing tool configured in the current Claude Code environment. Without one, the Skill still completes the content map, composition, locked text, production prompt, and verification plan, but never claims that an image file was generated.
 
 ```text
 为我的内容进行配图。
@@ -194,15 +220,17 @@ Detailed rules: [SKILL.md](SKILL.md) · [Style DNA](references/style-dna.md) · 
 
 ```powershell
 python -X utf8 scripts/validate_package.py
+python -X utf8 scripts/sync_claude_skill.py --target "$env:TEMP/boluobao" --dry-run
 ```
 
-The validator checks rule references, gold samples, image dimensions and hashes, invocation cases, aligned GitHub showcase ratios, brand resources, duplicate images, forbidden artifact directories, and the 60 MB package limit.
+The validator checks rule references, gold samples, image dimensions and hashes, invocation cases, aligned GitHub showcase ratios, brand resources, the Claude Code bridge and synchronizer, duplicate images, forbidden artifact directories, and the 60 MB package limit.
 
 ## 项目结构 / Repository Structure
 
 ```text
 boluobao/
 ├── SKILL.md                  # Skill entry point / 入口规则
+├── .claude/skills/boluobao/  # Claude Code project bridge
 ├── agents/openai.yaml        # UI metadata and invocation policy
 ├── assets/
 │   ├── brand/                # Pineapple-bun brand icon
@@ -210,7 +238,7 @@ boluobao/
 │   └── tests/                # Gold and structural baselines
 ├── docs/showcase/            # Lightweight GitHub previews
 ├── references/               # Mode-specific rules and quality gates
-├── scripts/                  # Archive and package validators
+├── scripts/                  # Archive, validation, and Claude sync tools
 ├── ASSETS-LICENSE.md         # Asset-specific licensing boundaries
 ├── CHANGELOG.md
 └── LICENSE

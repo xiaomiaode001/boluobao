@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## v1.2.0 — 2026-08-31
+
+### Added
+
+- Added a Claude Code project Skill bridge at `.claude/skills/boluobao/SKILL.md` with explicit `/boluobao` and automatic description-based invocation.
+- Added a manifest-based synchronizer for installing the canonical package at `~/.claude/skills/boluobao` without maintaining a second visual rule source.
+- Added Claude Code compatibility checks to the package validator and bilingual installation guidance to the README.
+
+### Changed
+
 - Added a seamless bilingual `16:9` project hero and a native `5:2` wide-cover variant that carry words, image-making, and data cues into food, human-scale scenes, and landscape through one continuous paper world.
 - Rebuilt the GitHub README as a paired Chinese and English project introduction.
 - Added aligned capability showcases for handwritten notes, social covers, editorial illustrations, charts, and tables.

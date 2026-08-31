@@ -98,6 +98,8 @@ def validate(root: Path) -> list[str]:
     asset_terms = root / "ASSETS-LICENSE.md"
     notice = root / "NOTICE"
     openai_yaml = root / "agents" / "openai.yaml"
+    claude_bridge = root / ".claude" / "skills" / "boluobao" / "SKILL.md"
+    claude_sync = root / "scripts" / "sync_claude_skill.py"
     manifest_path = root / "assets" / "tests" / "test-manifest.json"
     invocation_path = root / "assets" / "tests" / "invocation-cases.json"
 
@@ -184,6 +186,35 @@ def validate(root: Path) -> list[str]:
             if fragment not in yaml_text:
                 failures.append(f"agents/openai.yaml missing: {fragment}")
 
+    if not claude_bridge.is_file():
+        failures.append("missing Claude Code project bridge")
+    else:
+        bridge_text = claude_bridge.read_text(encoding="utf-8")
+        required_fragments = [
+            "name: boluobao",
+            "../../../SKILL.md",
+            "/boluobao",
+            "agents/openai.yaml",
+        ]
+        for fragment in required_fragments:
+            if fragment not in bridge_text:
+                failures.append(f"Claude Code bridge missing: {fragment}")
+
+    if not claude_sync.is_file():
+        failures.append("missing Claude Code synchronization script")
+    else:
+        sync_text = claude_sync.read_text(encoding="utf-8")
+        required_fragments = [
+            'Path.home() / ".claude" / "skills" / "boluobao"',
+            'Path("assets/references")',
+            'Path("assets/tests")',
+            'Path("assets/brand")',
+            "SYNC_MANIFEST",
+        ]
+        for fragment in required_fragments:
+            if fragment not in sync_text:
+                failures.append(f"Claude Code synchronizer missing: {fragment}")
+
     if not manifest_path.is_file():
         failures.append("missing assets/tests/test-manifest.json")
         return failures
@@ -196,8 +227,8 @@ def validate(root: Path) -> list[str]:
 
     if manifest.get("schema_version") != 1:
         failures.append("test manifest schema_version must be 1")
-    if manifest.get("package_version") != "1.1.0":
-        failures.append("test manifest package_version must be 1.1.0")
+    if manifest.get("package_version") != "1.2.0":
+        failures.append("test manifest package_version must be 1.2.0")
     style_references = manifest.get("style_references", [])
     samples = manifest.get("samples", [])
     if len(style_references) != 8:
@@ -225,6 +256,13 @@ def validate(root: Path) -> list[str]:
     if showcase_layout != expected_showcase_layout:
         failures.append("showcase_layout must define 8 aligned 4:5 cases and 4 aligned 16:9 boards")
     readme_text = readme.read_text(encoding="utf-8") if readme.is_file() else ""
+    for fragment in (
+        "~/.claude/skills/boluobao/",
+        "scripts/sync_claude_skill.py --install-user",
+        "/boluobao",
+    ):
+        if fragment not in readme_text:
+            failures.append(f"README.md missing Claude Code usage: {fragment}")
 
     expected_project_hero = {
         "file": "docs/showcase/boluobao-hero-16x9.webp",

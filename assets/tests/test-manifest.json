@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "package_version": "1.1.0",
+  "package_version": "1.2.0",
   "max_package_mb": 60,
   "style_references": [
     "assets/references/01-fashion-page.jpg",
@@ -19,6 +19,8 @@
     "NOTICE",
     "ASSETS-LICENSE.md",
     "LICENSES/CC-BY-4.0.txt",
+    ".claude/skills/boluobao/SKILL.md",
+    "scripts/sync_claude_skill.py",
     "assets/tests/editorial-reasoning-content-map.md",
     "assets/tests/cover-ai-classroom-content-map.md",
     "assets/tests/text-manuscript-source.md",
