@@ -27,6 +27,13 @@
     "assets/brand/boluobao-icon-400.png",
     "assets/brand/boluobao-icon-1024.png"
   ],
+  "project_hero": {
+    "file": "docs/showcase/boluobao-hero-16x9.webp",
+    "width": 1200,
+    "height": 675,
+    "ratio_label": "16:9",
+    "max_bytes": 153600
+  },
   "showcase_files": [
     "docs/showcase/rooftop-evening.webp",
     "docs/showcase/coastal-station.webp",

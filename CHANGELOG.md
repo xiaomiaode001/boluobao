@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added a seamless bilingual `16:9` project hero that brings food, human-scale scenes, and landscape into one continuous paper world.
 - Rebuilt the GitHub README as a paired Chinese and English project introduction.
 - Added aligned capability showcases for handwritten notes, social covers, editorial illustrations, charts, and tables.
 - Normalized the eight project cases to uncropped `4:5` previews and the four capability boards to `16:9`.

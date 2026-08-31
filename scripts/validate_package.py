@@ -225,6 +225,40 @@ def validate(root: Path) -> list[str]:
     if showcase_layout != expected_showcase_layout:
         failures.append("showcase_layout must define 8 aligned 4:5 cases and 4 aligned 16:9 boards")
     readme_text = readme.read_text(encoding="utf-8") if readme.is_file() else ""
+
+    expected_project_hero = {
+        "file": "docs/showcase/boluobao-hero-16x9.webp",
+        "width": 1200,
+        "height": 675,
+        "ratio_label": "16:9",
+        "max_bytes": 150 * 1024,
+    }
+    project_hero = manifest.get("project_hero", {})
+    if project_hero != expected_project_hero:
+        failures.append("project_hero must define the verified 1200x675 GitHub cover")
+    else:
+        hero_relative = project_hero["file"]
+        hero_path = root / hero_relative
+        if not hero_path.is_file():
+            failures.append(f"missing project hero: {hero_relative}")
+        else:
+            if hero_path.suffix.lower() != ".webp":
+                failures.append(f"project hero must be WebP: {hero_relative}")
+            if hero_relative.replace("\\", "/") not in readme_text:
+                failures.append(f"project hero is not displayed in README.md: {hero_relative}")
+            if hero_path.stat().st_size > project_hero["max_bytes"]:
+                failures.append(f"project hero exceeds 150 KB: {hero_relative}")
+            try:
+                hero_width, hero_height = webp_size(hero_path)
+            except ValueError as exc:
+                failures.append(f"cannot read project hero dimensions for {hero_relative}: {exc}")
+            else:
+                if (hero_width, hero_height) != (project_hero["width"], project_hero["height"]):
+                    failures.append(
+                        f"{hero_relative}: dimensions {hero_width}x{hero_height}, expected "
+                        f"{project_hero['width']}x{project_hero['height']} for project_hero"
+                    )
+
     showcase_bytes = 0
     for relative in showcase_files:
         path = root / relative

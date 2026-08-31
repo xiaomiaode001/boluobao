@@ -5,8 +5,8 @@
 <h1 align="center">Boluobao</h1>
 
 <p align="center">
-  <strong>把文字、数据与照片，变成有温度的纸上叙事。</strong><br>
-  <em>Turn words, data, and photographs into warm, hand-drawn stories on paper.</em>
+  <strong>把文字、图片与数据，重新画成有温度的视觉故事。</strong><br>
+  <em>Redraw words, images, and data as warm visual stories.</em>
 </p>
 
 <p align="center">
@@ -14,6 +14,10 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/code-Apache--2.0-5B778A" alt="Apache 2.0"></a>
   <a href="LICENSES/CC-BY-4.0.txt"><img src="https://img.shields.io/badge/test%20images-CC%20BY%204.0-CB8A4A" alt="CC BY 4.0"></a>
   <img src="https://img.shields.io/badge/Codex-Skill-6E7555" alt="Codex Skill">
+</p>
+
+<p align="center">
+  <img src="docs/showcase/boluobao-hero-16x9.webp" width="100%" alt="Boluobao 菠萝包：纸上有风，也有故事">
 </p>
 
 <p align="center">
