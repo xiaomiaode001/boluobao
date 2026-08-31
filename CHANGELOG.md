@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Rebuilt the GitHub README as a paired Chinese and English project introduction.
+- Added aligned capability showcases for handwritten notes, social covers, editorial illustrations, charts, and tables.
+- Normalized the eight project cases to uncropped `4:5` previews and the four capability boards to `16:9`.
+- Added machine validation for showcase count, dimensions, file size, and README inclusion.
+- Documented the Ida inspiration as creative context while preserving Boluobao's independent visual system.
+
 ## v1.1.0 — 2026-08-31
 
 首个面向公开复用的稳定版本。

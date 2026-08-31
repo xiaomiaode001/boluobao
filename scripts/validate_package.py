@@ -33,6 +33,31 @@ def png_size(path: Path) -> tuple[int, int]:
     return struct.unpack(">II", header[16:24])
 
 
+def webp_size(path: Path) -> tuple[int, int]:
+    """Read dimensions from VP8, VP8L, or VP8X WebP data."""
+    data = path.read_bytes()
+    if len(data) < 20 or data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+        raise ValueError("not a WebP file")
+    offset = 12
+    while offset + 8 <= len(data):
+        chunk_type = data[offset : offset + 4]
+        chunk_size = int.from_bytes(data[offset + 4 : offset + 8], "little")
+        payload = data[offset + 8 : offset + 8 + chunk_size]
+        if chunk_type == b"VP8X" and len(payload) >= 10:
+            width = int.from_bytes(payload[4:7], "little") + 1
+            height = int.from_bytes(payload[7:10], "little") + 1
+            return width, height
+        if chunk_type == b"VP8L" and len(payload) >= 5 and payload[0] == 0x2F:
+            bits = int.from_bytes(payload[1:5], "little")
+            return (bits & 0x3FFF) + 1, ((bits >> 14) & 0x3FFF) + 1
+        if chunk_type == b"VP8 " and len(payload) >= 10 and payload[3:6] == b"\x9d\x01\x2a":
+            width = int.from_bytes(payload[6:8], "little") & 0x3FFF
+            height = int.from_bytes(payload[8:10], "little") & 0x3FFF
+            return width, height
+        offset += 8 + chunk_size + (chunk_size % 2)
+    raise ValueError("unsupported WebP dimensions")
+
+
 def ratio_value(label: str) -> float:
     match = re.fullmatch(r"([0-9]+(?:\.[0-9]+)?):([0-9]+(?:\.[0-9]+)?)", label)
     if not match:
@@ -185,8 +210,20 @@ def validate(root: Path) -> list[str]:
             failures.append(f"missing manifest resource: {relative}")
 
     showcase_files = manifest.get("showcase_files", [])
-    if len(showcase_files) != 8:
-        failures.append(f"expected 8 GitHub showcase images, found {len(showcase_files)}")
+    if len(showcase_files) != 12:
+        failures.append(f"expected 12 GitHub showcase images, found {len(showcase_files)}")
+    expected_showcase_layout = {
+        "case_studies": {"count": 8, "width": 720, "height": 900, "ratio_label": "4:5"},
+        "capability_boards": {
+            "count": 4,
+            "width": 1200,
+            "height": 675,
+            "ratio_label": "16:9",
+        },
+    }
+    showcase_layout = manifest.get("showcase_layout", {})
+    if showcase_layout != expected_showcase_layout:
+        failures.append("showcase_layout must define 8 aligned 4:5 cases and 4 aligned 16:9 boards")
     readme_text = readme.read_text(encoding="utf-8") if readme.is_file() else ""
     showcase_bytes = 0
     for relative in showcase_files:
@@ -200,6 +237,18 @@ def validate(root: Path) -> list[str]:
             failures.append(f"showcase image is not displayed in README.md: {relative}")
         if path.stat().st_size > 150 * 1024:
             failures.append(f"showcase image exceeds 150 KB: {relative}")
+        group = "capability_boards" if path.name.startswith("capability-") else "case_studies"
+        expected = expected_showcase_layout[group]
+        try:
+            width, height = webp_size(path)
+        except ValueError as exc:
+            failures.append(f"cannot read showcase dimensions for {relative}: {exc}")
+        else:
+            if (width, height) != (expected["width"], expected["height"]):
+                failures.append(
+                    f"{relative}: dimensions {width}x{height}, expected "
+                    f"{expected['width']}x{expected['height']} for {group}"
+                )
         showcase_bytes += path.stat().st_size
     if showcase_bytes > 1024 * 1024:
         failures.append("GitHub showcase images exceed 1 MB total")
