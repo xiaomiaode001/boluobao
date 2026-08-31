@@ -21,6 +21,10 @@
 </p>
 
 <p align="center">
+  <sub><a href="docs/showcase/cover-x-5x2-v1.webp">5:2 超宽封面 / Wide banner</a></sub>
+</p>
+
+<p align="center">
   <a href="#中文介绍">中文</a> · <a href="#english-introduction">English</a> ·
   <a href="#能力展示--capability-gallery">Gallery</a> · <a href="#快速开始--quick-start">Quick Start</a>
 </p>

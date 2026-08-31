@@ -259,6 +259,43 @@ def validate(root: Path) -> list[str]:
                         f"{project_hero['width']}x{project_hero['height']} for project_hero"
                     )
 
+    expected_cover_variants = [
+        {
+            "file": "docs/showcase/cover-x-5x2-v1.webp",
+            "platform": "x",
+            "width": 1500,
+            "height": 600,
+            "ratio_label": "5:2",
+            "max_bytes": 150 * 1024,
+        }
+    ]
+    cover_variants = manifest.get("project_cover_variants", [])
+    if cover_variants != expected_cover_variants:
+        failures.append("project_cover_variants must define the verified 1500x600 X cover")
+    else:
+        for cover in cover_variants:
+            cover_relative = cover["file"]
+            cover_path = root / cover_relative
+            if not cover_path.is_file():
+                failures.append(f"missing project cover variant: {cover_relative}")
+                continue
+            if cover_path.suffix.lower() != ".webp":
+                failures.append(f"project cover variant must be WebP: {cover_relative}")
+            if cover_relative.replace("\\", "/") not in readme_text:
+                failures.append(f"project cover variant is not linked in README.md: {cover_relative}")
+            if cover_path.stat().st_size > cover["max_bytes"]:
+                failures.append(f"project cover variant exceeds 150 KB: {cover_relative}")
+            try:
+                cover_width, cover_height = webp_size(cover_path)
+            except ValueError as exc:
+                failures.append(f"cannot read project cover dimensions for {cover_relative}: {exc}")
+            else:
+                if (cover_width, cover_height) != (cover["width"], cover["height"]):
+                    failures.append(
+                        f"{cover_relative}: dimensions {cover_width}x{cover_height}, expected "
+                        f"{cover['width']}x{cover['height']} for {cover['platform']}"
+                    )
+
     showcase_bytes = 0
     for relative in showcase_files:
         path = root / relative

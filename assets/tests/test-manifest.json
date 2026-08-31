@@ -34,6 +34,16 @@
     "ratio_label": "16:9",
     "max_bytes": 153600
   },
+  "project_cover_variants": [
+    {
+      "file": "docs/showcase/cover-x-5x2-v1.webp",
+      "platform": "x",
+      "width": 1500,
+      "height": 600,
+      "ratio_label": "5:2",
+      "max_bytes": 153600
+    }
+  ],
   "showcase_files": [
     "docs/showcase/rooftop-evening.webp",
     "docs/showcase/coastal-station.webp",
