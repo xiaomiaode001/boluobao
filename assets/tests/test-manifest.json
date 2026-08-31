@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "package_version": "1.1.0",
+  "max_package_mb": 60,
+  "style_references": [
+    "assets/references/01-fashion-page.jpg",
+    "assets/references/02-market-fashion.jpg",
+    "assets/references/03-food-notes.jpg",
+    "assets/references/04-food-grid.jpg",
+    "assets/references/05-story-page.jpg",
+    "assets/references/06-cover-collage.jpg",
+    "assets/references/07-fruit-notes.jpg",
+    "assets/references/08-timeline-comic.jpg"
+  ],
+  "support_files": [
+    "README.md",
+    ".gitignore",
+    "LICENSE",
+    "NOTICE",
+    "ASSETS-LICENSE.md",
+    "LICENSES/CC-BY-4.0.txt",
+    "assets/tests/editorial-reasoning-content-map.md",
+    "assets/tests/cover-ai-classroom-content-map.md",
+    "assets/tests/text-manuscript-source.md",
+    "assets/tests/text-manuscript-content-map.md",
+    "assets/tests/invocation-cases.json",
+    "assets/brand/boluobao-icon-400.png",
+    "assets/brand/boluobao-icon-1024.png"
+  ],
+  "showcase_files": [
+    "docs/showcase/rooftop-evening.webp",
+    "docs/showcase/coastal-station.webp",
+    "docs/showcase/misty-terraces.webp",
+    "docs/showcase/rainy-bookstore.webp",
+    "docs/showcase/lakeside-boardwalk.webp",
+    "docs/showcase/snowy-pine-road.webp",
+    "docs/showcase/pineapple-bun-process.webp",
+    "docs/showcase/braised-beef-noodles-process.webp"
+  ],
+  "samples": [
+    {
+      "file": "assets/tests/single-food-xiaolongbao-v2.png",
+      "mode": "single-food",
+      "quality_role": "baseline",
+      "score": 18,
+      "width": 1122,
+      "height": 1402,
+      "ratio_label": "4:5",
+      "sha256": "9D5E1E9B8863CFCE9FF5F07A09F25BDA3CE7C663571D4C0FB64BA94F3EB1818E"
+    },
+    {
+      "file": "assets/tests/single-food-xiaolongbao-v3.png",
+      "mode": "single-food",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1122,
+      "height": 1402,
+      "ratio_label": "4:5",
+      "sha256": "E2C543CECC21B6D272140157FFC8403DF728E07E97A41D3CA75C01C1DDDC4739"
+    },
+    {
+      "file": "assets/tests/scene-indoor-bookshop-v1.png",
+      "mode": "scene-indoor",
+      "quality_role": "baseline",
+      "score": 18,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "DC84A4D54F3565B564C4E497DE2E4B02789D51D17FE3D1136F28CCE47310CCAB"
+    },
+    {
+      "file": "assets/tests/scene-morning-market-v1.png",
+      "mode": "scene-street",
+      "quality_role": "baseline",
+      "score": 18,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "FB51484CB52AFD78ACFC8723FF81220E4B15516A213CB9E7039E2681E2984630"
+    },
+    {
+      "file": "assets/tests/scene-coastal-bus-stop-v1.png",
+      "mode": "scene-coastal",
+      "quality_role": "baseline",
+      "score": 18,
+      "width": 1122,
+      "height": 1402,
+      "ratio_label": "4:5",
+      "sha256": "04964D3D8EE918EAD4830471DAC0527E30C4B19D99B2868A34CB258A1BE35BBE"
+    },
+    {
+      "file": "assets/tests/landscape-loose-v2.png",
+      "mode": "landscape",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1121,
+      "height": 1403,
+      "ratio_label": "4:5",
+      "sha256": "6806067DFD5436E127670B4542B30F8838D91735C1A031405FCDF981E0E405B3"
+    },
+    {
+      "file": "assets/tests/letter-chinese-v2.png",
+      "mode": "letter-chinese",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "1E41B4884876000A9FDD0EB98D0A37701182AF699A50D10BAA59394D1D5CBDA7"
+    },
+    {
+      "file": "assets/tests/letter-english-v2.png",
+      "mode": "letter-english",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "6ECD5F07AA29DD832D2205489DCFD89CB3D2449C8983E2C9272790863F412F34"
+    },
+    {
+      "file": "assets/tests/character-podcast-v1.png",
+      "mode": "character-card",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "CFC91A2AF1F7D351A86A860D2D23DE35B8BA643D928DF0E787A4018309561CD8"
+    },
+    {
+      "file": "assets/tests/landmark-loose-v3.png",
+      "mode": "landmark",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "395FD3444186352FD22484D90AB6E6443597150FB1BA41989B9A910137054C62"
+    },
+    {
+      "file": "assets/tests/text-manuscript-loose-v3.png",
+      "mode": "manuscript-story",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1024,
+      "height": 1536,
+      "ratio_label": "2:3",
+      "sha256": "CD2D6FFA1F999017334A6C9DA5D6FB22FB5B8C911042BCD53D6BCD7A167B4DDD"
+    },
+    {
+      "file": "assets/tests/editorial-reasoning-01-16x9-v2.png",
+      "mode": "article-social-entry",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1672,
+      "height": 941,
+      "ratio_label": "16:9",
+      "sha256": "05BF265A6EAC600CCF4ED7C8FC71DD411D5A3E6ED109D9AA197F19AF32FB2817"
+    },
+    {
+      "file": "assets/tests/editorial-reasoning-02-16x9-v3.png",
+      "mode": "article-social-mechanism",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1672,
+      "height": 941,
+      "ratio_label": "16:9",
+      "sha256": "9F301C34493E44442494178413D895788CB04C719CC9EDF52954B2342336C871"
+    },
+    {
+      "file": "assets/tests/editorial-reasoning-03-16x9-v2.png",
+      "mode": "article-social-consequence",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1672,
+      "height": 941,
+      "ratio_label": "16:9",
+      "sha256": "6A9480A133D82530A1AFDB33B89DA36B83EC0F4D10805EA8E4B561DD5783F8D1"
+    },
+    {
+      "file": "assets/tests/cover-ai-classroom-wechat-v1.png",
+      "mode": "cover-wechat",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1922,
+      "height": 818,
+      "ratio_label": "2.35:1",
+      "sha256": "B8548BAC1752E38A5DA0DA6FBCE6A29CEF71DD526E9A5C73FED12E09AA1AC606"
+    },
+    {
+      "file": "assets/tests/cover-ai-classroom-xiaohongshu-v1.png",
+      "mode": "cover-xiaohongshu",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1086,
+      "height": 1448,
+      "ratio_label": "3:4",
+      "sha256": "D9FC349CC38342F35E8E2B91F7DFA9490A97044C8EECDA500EE269E4591AA29E"
+    },
+    {
+      "file": "assets/tests/cover-ai-classroom-x-v1.png",
+      "mode": "cover-x",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1983,
+      "height": 793,
+      "ratio_label": "5:2",
+      "sha256": "B13F828BDA8C739EC76E60F844D9FF797A9419020050340D7E037ED5D0164C64"
+    },
+    {
+      "file": "assets/tests/character-closeup-student-v1.png",
+      "mode": "character-closeup",
+      "quality_role": "baseline",
+      "score": 18,
+      "width": 1122,
+      "height": 1402,
+      "ratio_label": "4:5",
+      "sha256": "77E5B6EF5CFF43547BA39989AC98B058FF8E1E0BEFA40539C9058FB4B62C5D4D"
+    },
+    {
+      "file": "assets/tests/character-closeup-student-v2.png",
+      "mode": "character-closeup",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1122,
+      "height": 1402,
+      "ratio_label": "4:5",
+      "sha256": "1865A2AB00FC52A1D1AF04EC2733E2E0A6E3D15DDAE145749B6A1D5AE9A43E03"
+    },
+    {
+      "file": "assets/tests/data-bar-chart-16x9-v1.png",
+      "mode": "data-chart",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1672,
+      "height": 941,
+      "ratio_label": "16:9",
+      "sha256": "7FC66D062B1D36903F571BA6DE194C12A24B66436340C87FBF8521E8B634709C"
+    },
+    {
+      "file": "assets/tests/data-table-16x9-v1.png",
+      "mode": "data-table",
+      "quality_role": "gold",
+      "score": 19,
+      "width": 1672,
+      "height": 941,
+      "ratio_label": "16:9",
+      "sha256": "2FC025515B0AE750509327A1E6031452F6E599E87B6F744984B60DD8A06FA43C"
+    }
+  ]
+}

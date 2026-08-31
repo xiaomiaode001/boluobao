@@ -1,0 +1,9 @@
+interface:
+  display_name: "Boluobao 画风"
+  short_description: "规划配图、封面、图表与表格，或重构为彩铅手账风格"
+  icon_small: "./assets/brand/boluobao-icon-400.png"
+  icon_large: "./assets/brand/boluobao-icon-1024.png"
+  brand_color: "#D47B3B"
+  default_prompt: "使用 $boluobao 为我的文字或数据规划配图、封面、图表或表格；如果我提供图片，请保留其内容并重构为 Boluobao 风格。"
+policy:
+  allow_implicit_invocation: true

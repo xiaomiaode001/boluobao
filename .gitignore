@@ -1,0 +1,23 @@
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Python and local environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+
+# Local generation artifacts
+output/
+working/
+candidate/
+tmp/
+*.tmp
+
+# Editor metadata
+.idea/
+.vscode/

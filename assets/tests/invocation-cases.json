@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "single-paragraph-article",
+      "request": "为我的内容进行配图：复杂问题不一定需要立刻回答，给推理留下检查和重试的空间，往往比直接输出更可靠。",
+      "expected_entry": "text-to-article-images",
+      "expected_mode": "editorial-illustration",
+      "expected_count": 1,
+      "expected_ratio": "16:9",
+      "must_plan": true
+    },
+    {
+      "id": "multi-paragraph-article",
+      "request": "为下面的多段文章进行配图。文章依次讨论即时回答的风险、拆解检查的机制，以及更多思考带来的能力增长。",
+      "expected_entry": "text-to-article-images",
+      "expected_mode": "article-social-series",
+      "expected_count_min": 2,
+      "expected_count_max": 3,
+      "expected_ratio": "16:9",
+      "must_plan": true
+    },
+    {
+      "id": "generic-social-cover",
+      "request": "为这篇文章生成社媒封面，标题是：允许 AI 先想一会，打开另一条增长曲线。",
+      "expected_entry": "text-to-cover",
+      "expected_mode": "cover",
+      "expected_count": 1,
+      "expected_ratio": "4:5",
+      "must_lock_title": true
+    },
+    {
+      "id": "platform-cover-set",
+      "request": "为同一篇文章生成公众号、小红书和 X 封面，X 使用 5:2。",
+      "expected_entry": "text-to-cover",
+      "expected_mode": "platform-cover-set",
+      "expected_count": 3,
+      "expected_ratios": ["2.35:1", "3:4", "5:2"],
+      "must_recompose": true
+    },
+    {
+      "id": "image-style-reconstruction",
+      "request": "帮我将这个图片用 boluobao 进行设计。",
+      "expected_entry": "image-to-boluobao-design",
+      "expected_mode": "infer-from-source",
+      "expected_count": 1,
+      "must_preserve": ["subject_count", "identity", "pose", "viewpoint", "diagnostic_features"],
+      "must_reconstruct": true
+    },
+    {
+      "id": "data-bar-chart",
+      "request": "用 boluobao 将这些数据做成柱状图：立即 62%，短思考 74%，深思考 86%。",
+      "expected_entry": "text-or-data-to-graphic",
+      "expected_mode": "data-chart",
+      "expected_count": 1,
+      "expected_ratio": "16:9",
+      "must_lock_data": ["labels", "values", "units", "order", "bar_mapping", "baseline"]
+    },
+    {
+      "id": "compact-data-table",
+      "request": "用 boluobao 做一张平台与封面比例表格：公众号 2.35:1，小红书 3:4，X 5:2。",
+      "expected_entry": "text-or-data-to-graphic",
+      "expected_mode": "data-table",
+      "expected_count": 1,
+      "expected_ratio": "16:9",
+      "must_lock_data": ["headers", "rows", "columns", "cell_membership", "values", "order"]
+    }
+  ],
+  "exact_text_policy": {
+    "initial_generation": 1,
+    "maximum_surgical_corrections": 1,
+    "cover_or_article_second_failure": "blank-fallback",
+    "letter_second_failure": "blank-fallback",
+    "protected_data_second_failure": "fail"
+  },
+  "exact_text_regression": {
+    "expected": "今日便签",
+    "first_generated": "今日便笺",
+    "first_action": "surgical-correction",
+    "second_generated": "今日便笺",
+    "second_action": "blank-fallback",
+    "final_exact_text_status": "blank-fallback"
+  },
+  "retention_policy": {
+    "default": "final-only",
+    "scope": "active-request",
+    "rejected_candidates": "do-not-copy-to-project-output",
+    "superseded_corrections": "do-not-deliver",
+    "requested_multi-image_set": "retain-each-accepted-deliverable",
+    "dedicated_task_staging": "cleanup-after-verified-final-copy",
+    "shared_generator_cache": "never-recursively-delete",
+    "previously_delivered_tasks": "preserve"
+  },
+  "delivery_fields": [
+    "source_role",
+    "visual_proposition",
+    "anchor_state",
+    "ratio",
+    "pixel_dimensions",
+    "exact_text_status",
+    "data_verification_status",
+    "rubric_score",
+    "absolute_path"
+  ]
+}

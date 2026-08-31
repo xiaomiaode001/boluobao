@@ -1,0 +1,392 @@
+#!/usr/bin/env python3
+"""Validate the closed Boluobao v1 skill package using only the standard library."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import re
+import struct
+import sys
+from collections import defaultdict
+from pathlib import Path
+
+
+FORBIDDEN_DIRECTORY_TOKENS = ("working", "candidate")
+REPOSITORY_METADATA_DIRECTORIES = {".git", "__pycache__"}
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest().upper()
+
+
+def png_size(path: Path) -> tuple[int, int]:
+    with path.open("rb") as handle:
+        header = handle.read(24)
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("not a PNG file")
+    return struct.unpack(">II", header[16:24])
+
+
+def ratio_value(label: str) -> float:
+    match = re.fullmatch(r"([0-9]+(?:\.[0-9]+)?):([0-9]+(?:\.[0-9]+)?)", label)
+    if not match:
+        raise ValueError(f"invalid ratio label: {label}")
+    return float(match.group(1)) / float(match.group(2))
+
+
+def relative_links(markdown: Path) -> list[Path]:
+    text = markdown.read_text(encoding="utf-8")
+    links = []
+    for raw in re.findall(r"\[[^\]]+\]\(([^)]+)\)", text):
+        target = raw.strip().split("#", 1)[0]
+        if not target or re.match(r"^[a-z]+://", target, re.I):
+            continue
+        links.append((markdown.parent / target).resolve())
+    return links
+
+
+def package_files(root: Path) -> list[Path]:
+    files: list[Path] = []
+    for path in root.rglob("*"):
+        if not path.is_file():
+            continue
+        relative_parts = path.relative_to(root).parts
+        if any(part in REPOSITORY_METADATA_DIRECTORIES for part in relative_parts):
+            continue
+        files.append(path)
+    return files
+
+
+def validate(root: Path) -> list[str]:
+    failures: list[str] = []
+    root = root.resolve()
+    skill_md = root / "SKILL.md"
+    readme = root / "README.md"
+    apache_license = root / "LICENSE"
+    cc_license = root / "LICENSES" / "CC-BY-4.0.txt"
+    asset_terms = root / "ASSETS-LICENSE.md"
+    notice = root / "NOTICE"
+    openai_yaml = root / "agents" / "openai.yaml"
+    manifest_path = root / "assets" / "tests" / "test-manifest.json"
+    invocation_path = root / "assets" / "tests" / "invocation-cases.json"
+
+    if not skill_md.is_file():
+        return ["missing SKILL.md"]
+    skill_text = skill_md.read_text(encoding="utf-8")
+    if not skill_text.startswith("---\n") or "\n---\n" not in skill_text[4:]:
+        failures.append("SKILL.md frontmatter is missing or malformed")
+    if not re.search(r"(?m)^name:\s*boluobao\s*$", skill_text):
+        failures.append("SKILL.md name must remain boluobao")
+    if not re.search(r"(?m)^description:\s*.+$", skill_text):
+        failures.append("SKILL.md description is missing")
+
+    markdown_files = [skill_md, *sorted((root / "references").glob("*.md"))]
+    if readme.is_file():
+        markdown_files.append(readme)
+    else:
+        failures.append("missing GitHub README.md")
+    for markdown in markdown_files:
+        for target in relative_links(markdown):
+            if not target.exists():
+                failures.append(f"broken Markdown link in {markdown.relative_to(root)}: {target}")
+
+    if not apache_license.is_file():
+        failures.append("missing root Apache-2.0 LICENSE")
+    else:
+        license_text = apache_license.read_text(encoding="utf-8")
+        apache_fragments = [
+            "Apache License",
+            "Version 2.0, January 2004",
+            "Grant of Copyright License",
+            "Grant of Patent License",
+            "END OF TERMS AND CONDITIONS",
+        ]
+        for fragment in apache_fragments:
+            if fragment not in license_text:
+                failures.append(f"root LICENSE is missing Apache-2.0 text: {fragment}")
+
+    if not cc_license.is_file():
+        failures.append("missing LICENSES/CC-BY-4.0.txt")
+    else:
+        cc_text = cc_license.read_text(encoding="utf-8")
+        for fragment in (
+            "Creative Commons Attribution 4.0 International Public License",
+            "Section 5 -- Disclaimer of Warranties and Limitation of Liability",
+            "Section 6 -- Term and Termination",
+        ):
+            if fragment not in cc_text:
+                failures.append(f"CC BY 4.0 license text is missing: {fragment}")
+
+    if not asset_terms.is_file():
+        failures.append("missing ASSETS-LICENSE.md")
+    else:
+        terms_text = asset_terms.read_text(encoding="utf-8")
+        required_scopes = [
+            "assets/tests/",
+            "assets/brand/",
+            "docs/showcase/",
+            "assets/references/",
+            "Apache-2.0",
+            "CC BY 4.0",
+            "all rights reserved",
+            "no license granted",
+        ]
+        for scope in required_scopes:
+            if scope not in terms_text:
+                failures.append(f"ASSETS-LICENSE.md is missing scope: {scope}")
+
+    if not notice.is_file():
+        failures.append("missing NOTICE")
+
+    if not openai_yaml.is_file():
+        failures.append("missing agents/openai.yaml")
+    else:
+        yaml_text = openai_yaml.read_text(encoding="utf-8")
+        required_fragments = [
+            'icon_small: "./assets/brand/boluobao-icon-400.png"',
+            'icon_large: "./assets/brand/boluobao-icon-1024.png"',
+            'brand_color: "#D47B3B"',
+            "allow_implicit_invocation: true",
+            "$boluobao",
+        ]
+        for fragment in required_fragments:
+            if fragment not in yaml_text:
+                failures.append(f"agents/openai.yaml missing: {fragment}")
+
+    if not manifest_path.is_file():
+        failures.append("missing assets/tests/test-manifest.json")
+        return failures
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        failures.append(f"invalid test manifest: {exc}")
+        return failures
+
+    if manifest.get("schema_version") != 1:
+        failures.append("test manifest schema_version must be 1")
+    if manifest.get("package_version") != "1.1.0":
+        failures.append("test manifest package_version must be 1.1.0")
+    style_references = manifest.get("style_references", [])
+    samples = manifest.get("samples", [])
+    if len(style_references) != 8:
+        failures.append(f"expected 8 style references, found {len(style_references)}")
+    if len(samples) != 21:
+        failures.append(f"expected 21 retained test samples, found {len(samples)}")
+
+    for relative in [*style_references, *manifest.get("support_files", [])]:
+        if not (root / relative).is_file():
+            failures.append(f"missing manifest resource: {relative}")
+
+    showcase_files = manifest.get("showcase_files", [])
+    if len(showcase_files) != 8:
+        failures.append(f"expected 8 GitHub showcase images, found {len(showcase_files)}")
+    readme_text = readme.read_text(encoding="utf-8") if readme.is_file() else ""
+    showcase_bytes = 0
+    for relative in showcase_files:
+        path = root / relative
+        if not path.is_file():
+            failures.append(f"missing showcase image: {relative}")
+            continue
+        if path.suffix.lower() != ".webp":
+            failures.append(f"showcase image must be WebP: {relative}")
+        if relative.replace("\\", "/") not in readme_text:
+            failures.append(f"showcase image is not displayed in README.md: {relative}")
+        if path.stat().st_size > 150 * 1024:
+            failures.append(f"showcase image exceeds 150 KB: {relative}")
+        showcase_bytes += path.stat().st_size
+    if showcase_bytes > 1024 * 1024:
+        failures.append("GitHub showcase images exceed 1 MB total")
+
+    if not invocation_path.is_file():
+        failures.append("missing assets/tests/invocation-cases.json")
+    else:
+        try:
+            invocation = json.loads(invocation_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            failures.append(f"invalid invocation cases: {exc}")
+        else:
+            if invocation.get("schema_version") != 1:
+                failures.append("invocation cases schema_version must be 1")
+            cases = invocation.get("cases", [])
+            expected_case_ids = {
+                "single-paragraph-article",
+                "multi-paragraph-article",
+                "generic-social-cover",
+                "platform-cover-set",
+                "image-style-reconstruction",
+                "data-bar-chart",
+                "compact-data-table",
+            }
+            case_ids = {case.get("id") for case in cases}
+            if len(cases) != 7 or case_ids != expected_case_ids:
+                failures.append("invocation cases must contain the seven v1.1 routing scenarios")
+            case_by_id = {case.get("id"): case for case in cases}
+            generic = case_by_id.get("generic-social-cover", {})
+            if generic.get("expected_ratio") != "4:5":
+                failures.append("generic social cover fallback must be 4:5")
+            single = case_by_id.get("single-paragraph-article", {})
+            if single.get("expected_count") != 1 or single.get("expected_ratio") != "16:9":
+                failures.append("single-paragraph article must route to one 16:9 image")
+            multi = case_by_id.get("multi-paragraph-article", {})
+            if multi.get("expected_count_min") != 2 or multi.get("expected_count_max") != 3:
+                failures.append("multi-paragraph article must route to two or three images")
+            chart = case_by_id.get("data-bar-chart", {})
+            if chart.get("expected_mode") != "data-chart" or chart.get("expected_ratio") != "16:9":
+                failures.append("bar-chart request must route to one 16:9 data chart")
+            table = case_by_id.get("compact-data-table", {})
+            if table.get("expected_mode") != "data-table" or table.get("expected_ratio") != "16:9":
+                failures.append("table request must route to one 16:9 compact data table")
+            policy = invocation.get("exact_text_policy", {})
+            if policy.get("maximum_surgical_corrections") != 1:
+                failures.append("exact-text policy must allow exactly one surgical correction")
+            if any(
+                policy.get(key) != "blank-fallback"
+                for key in ("cover_or_article_second_failure", "letter_second_failure")
+            ):
+                failures.append("second exact-text failure must route to blank-fallback")
+            if policy.get("protected_data_second_failure") != "fail":
+                failures.append("second protected-data failure must fail the data graphic")
+            regression = invocation.get("exact_text_regression", {})
+            if regression.get("expected") == regression.get("first_generated"):
+                failures.append("exact-text regression fixture must contain a wrong first output")
+            if regression.get("first_action") != "surgical-correction":
+                failures.append("first exact-text failure must request surgical-correction")
+            if regression.get("second_action") != "blank-fallback":
+                failures.append("second exact-text failure must request blank-fallback")
+            if regression.get("final_exact_text_status") != "blank-fallback":
+                failures.append("exact-text regression fixture must end as blank-fallback")
+            retention = invocation.get("retention_policy", {})
+            expected_retention = {
+                "default": "final-only",
+                "scope": "active-request",
+                "rejected_candidates": "do-not-copy-to-project-output",
+                "superseded_corrections": "do-not-deliver",
+                "requested_multi-image_set": "retain-each-accepted-deliverable",
+                "dedicated_task_staging": "cleanup-after-verified-final-copy",
+                "shared_generator_cache": "never-recursively-delete",
+                "previously_delivered_tasks": "preserve",
+            }
+            if any(retention.get(key) != value for key, value in expected_retention.items()):
+                failures.append("retention policy must enforce final-only active-request delivery")
+            required_delivery = {
+                "source_role",
+                "visual_proposition",
+                "anchor_state",
+                "ratio",
+                "pixel_dimensions",
+                "exact_text_status",
+                "data_verification_status",
+                "rubric_score",
+                "absolute_path",
+            }
+            if not required_delivery.issubset(set(invocation.get("delivery_fields", []))):
+                failures.append("invocation delivery_fields are incomplete")
+
+    for sample in samples:
+        relative = sample.get("file", "")
+        path = root / relative
+        if not path.is_file():
+            failures.append(f"missing test sample: {relative}")
+            continue
+        try:
+            width, height = png_size(path)
+        except ValueError as exc:
+            failures.append(f"{relative}: {exc}")
+            continue
+        if width != sample.get("width") or height != sample.get("height"):
+            failures.append(
+                f"{relative}: dimensions {width}x{height}, expected "
+                f"{sample.get('width')}x{sample.get('height')}"
+            )
+        try:
+            expected_ratio = ratio_value(sample.get("ratio_label", ""))
+            actual_ratio = width / height
+            if abs(actual_ratio - expected_ratio) > 0.01:
+                failures.append(
+                    f"{relative}: ratio {actual_ratio:.4f} outside tolerance for "
+                    f"{sample.get('ratio_label')}"
+                )
+        except ValueError as exc:
+            failures.append(f"{relative}: {exc}")
+        expected_hash = sample.get("sha256", "").upper()
+        if expected_hash and sha256(path) != expected_hash:
+            failures.append(f"{relative}: SHA-256 does not match the approved sample")
+        role = sample.get("quality_role")
+        score = sample.get("score", 0)
+        if role == "gold" and score < 19:
+            failures.append(f"{relative}: gold sample must score at least 19")
+        if role == "baseline" and score < 18:
+            failures.append(f"{relative}: baseline sample must score at least 18")
+
+    icon_expectations = {
+        root / "assets" / "brand" / "boluobao-icon-400.png": (400, 400),
+        root / "assets" / "brand" / "boluobao-icon-1024.png": (1024, 1024),
+    }
+    for icon, expected in icon_expectations.items():
+        if icon.is_file():
+            try:
+                if png_size(icon) != expected:
+                    failures.append(
+                        f"{icon.relative_to(root)} must be {expected[0]}x{expected[1]}"
+                    )
+            except ValueError as exc:
+                failures.append(f"{icon.relative_to(root)}: {exc}")
+
+    for directory in [p for p in root.rglob("*") if p.is_dir()]:
+        name = directory.name.lower()
+        if name == "output" or any(token in name for token in FORBIDDEN_DIRECTORY_TOKENS):
+            failures.append(f"forbidden package directory: {directory.relative_to(root)}")
+
+    hash_paths: dict[str, list[Path]] = defaultdict(list)
+    for image in sorted((root / "assets").rglob("*")):
+        if image.is_file() and image.suffix.lower() in {".png", ".jpg", ".jpeg"}:
+            hash_paths[sha256(image)].append(image)
+    for paths in hash_paths.values():
+        if len(paths) > 1:
+            joined = ", ".join(str(path.relative_to(root)) for path in paths)
+            failures.append(f"duplicate image content: {joined}")
+
+    package_bytes = sum(path.stat().st_size for path in package_files(root))
+    max_package_mb = float(manifest.get("max_package_mb", 60))
+    package_mb = package_bytes / (1024 * 1024)
+    if package_mb > max_package_mb:
+        failures.append(
+            f"package size {package_mb:.1f} MB exceeds {max_package_mb:.1f} MB"
+        )
+
+    return failures
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "root",
+        nargs="?",
+        type=Path,
+        default=Path(__file__).resolve().parents[1],
+        help="Boluobao skill root",
+    )
+    args = parser.parse_args()
+    failures = validate(args.root)
+    if failures:
+        print("Boluobao package validation failed:")
+        for failure in failures:
+            print(f"- {failure}")
+        return 1
+    root = args.root.resolve()
+    size_mb = sum(path.stat().st_size for path in package_files(root)) / (
+        1024 * 1024
+    )
+    print(f"Boluobao package valid: {size_mb:.1f} MB, 21 samples, 8 references")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
