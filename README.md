@@ -32,7 +32,7 @@
 
 ## 中文介绍
 
-**Boluobao** 是一个兼容 Codex 与 Claude Code 的可调用 Skill，为创作者、自媒体作者、教育工作者与独立团队提供稳定、可复用的风格化视觉设计。它能理解文章结构与叙事核心，自动规划适合配图的段落和最少图片数量；也能生成社媒封面、中英文手写便签、食物与场景插画、人物近景、轻量图表和表格，或将用户提供的照片重构成统一的手账式视觉。
+**Boluobao** 是一个兼容 Codex 与 Claude Code 的可调用 Skill，为创作者、自媒体作者、教育工作者与独立团队提供稳定、可复用的风格化视觉设计。它能理解文章结构与叙事核心，自动规划适合配图的段落和最少图片数量；也能生成社媒封面、中英日及多语手写便签、食物与场景插画、人物近景、轻量图表和表格，或将用户提供的照片重构成统一的手账式视觉。
 
 它不是一个只会套滤镜的提示词，而是一套包含内容规划、构图、文字校对、数据保护、质量评分和交付规则的完整工作流。视觉语言由暖色无涂布纸、深色墨线、半透明彩铅、留白、手写批注和受控的不规则感组成。
 
@@ -40,7 +40,7 @@
 
 ## English Introduction
 
-**Boluobao** is an invokable Skill for Codex and Claude Code, built for creators, social-media publishers, educators, and independent teams who need a consistent, reusable visual language. It reads the structure and narrative core of an article, selects the paragraphs that benefit from illustration, and proposes the smallest useful image set. It can also create social covers, Chinese and English handwritten notes, food and scene illustrations, close-up characters, compact charts and tables, or reconstruct a supplied photograph in a coherent journal-like style.
+**Boluobao** is an invokable Skill for Codex and Claude Code, built for creators, social-media publishers, educators, and independent teams who need a consistent, reusable visual language. It reads the structure and narrative core of an article, selects the paragraphs that benefit from illustration, and proposes the smallest useful image set. It can also create multilingual handwritten notes—including Chinese, English, and Japanese—social covers, food and scene illustrations, close-up characters, compact charts and tables, or reconstruct a supplied photograph in a coherent journal-like style.
 
 This is more than a filter prompt. Boluobao combines content planning, composition, text verification, data protection, quality scoring, and delivery rules in one workflow. Its visual language uses warm uncoated paper, dark ink contours, translucent colored pencil, purposeful whitespace, handwritten annotations, and controlled imperfection.
 
@@ -60,7 +60,7 @@ The project was inspired by Korean illustrator and author **[이다 (2da / Ida)]
 |---|---|---|---|
 | 文章配图 / Editorial illustration | 识别段落角色、叙事命题与适合配图的位置 | Maps paragraph roles, narrative propositions, and illustration opportunities | `16:9`, 最少必要张数 / minimum useful set |
 | 社媒封面 / Social cover | 为公众号、小红书、X 等平台原生重构，不直接裁切同一母版 | Re-composes natively for WeChat, Xiaohongshu, X, and other platforms | 通用 `4:5`; 平台原生比例 / native ratio |
-| 手写便签 / Handwritten note | 中文重心与字宽变化；英文倾斜与 x-height 变化 | Variable Chinese centers and widths; varied English slant and x-height | 单页或双语组图 / single page or bilingual set |
+| 手写便签 / Handwritten note | 锁定中英日及多语文字，分别处理中文重心、英文 x-height 与日文假名节奏 | Locks Chinese, English, Japanese, and multilingual copy while preserving each script's own handwritten rhythm | 单页、双语或多语 / single, bilingual, or multilingual |
 | 图片重构 / Image reconstruction | 保留主体、身份、姿态、视角与关键空间关系 | Preserves subject, identity, pose, viewpoint, and diagnostic spatial relationships | 依输入与用途 / based on input and use |
 | 食物、人物与场景 / Food, people & scenes | 单体食物、制作流程、近景人物、景观与地标 | Single food, process boards, close-up characters, landscapes, and landmarks | 叙事优先 / narrative-first |
 | 图表与表格 / Charts & tables | 保护标签、数值、单位、排序、柱高与单元格归属 | Protects labels, values, units, ordering, bar geometry, and cell ownership | 紧凑数据 / compact data only |
@@ -81,6 +81,16 @@ All four capability boards use the same `16:9` frame. Samples within each catego
     <td width="50%"><img src="docs/showcase/capability-data-16x9.webp" alt="Hand-drawn bar chart and compact table"><br><sub><b>图表与表格 / Charts & tables</b><br>保留准确数据和视觉编码，让信息表达也具备统一纸上风格。</sub></td>
   </tr>
 </table>
+
+### 多语便签 / Multilingual Note
+
+<p align="center">
+  <img src="docs/showcase/trilingual-ai-friends-note.webp" width="52%" alt="A Boluobao handwritten note inviting connections with AI enthusiasts in English, Japanese, and Chinese">
+</p>
+
+<p align="center">
+  <sub><b>连接世界各地的 AI 爱好者 / Connecting AI enthusiasts worldwide</b><br>英文、日文与中文在未指定主语言时保持等权层级，以人物、地球和连接线表达交流，不依赖国旗或文化刻板符号。<br>English, Japanese, and Chinese share equal hierarchy when no primary language is named; people, a globe, and connecting paths communicate the idea without flags or cultural stereotypes.</sub>
+</p>
 
 ## 项目案例 / Project Showcase
 
@@ -196,6 +206,9 @@ Redesign this image with boluobao while preserving its subject and composition.
 
 用 boluobao 把这些数据做成柱状图和紧凑表格。
 Turn this data into a boluobao bar chart and compact table.
+
+用 boluobao 创作一张中英日三语便签，未指定主语言时让三种文字等权呈现。
+Create a Chinese-English-Japanese note with equal language hierarchy using boluobao.
 ```
 
 文字配图任务会先给出内容角色、建议张数、每张叙事命题、比例与短文字锁定。最终交付包含段落映射、尺寸、文字或数据校验状态、质量评分和绝对文件路径。

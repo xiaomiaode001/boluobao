@@ -11,6 +11,7 @@ Use these boundaries only after changing shared style, routing, text, or validat
 | Landscape | `landscape-loose-v2.png` | 19 | filled natural surfaces, dashed routes, complete tree repetition |
 | Chinese letter | `letter-chinese-v2.png` | 19 | font-like rhythm or damaged radicals |
 | English letter | `letter-english-v2.png` | 19 | uniform x-height/slant or ambiguous letterforms |
+| Multilingual note | `docs/showcase/trilingual-ai-friends-note.webp` | 19 | unequal language hierarchy, Japanese mark loss, mixed-script token drift, flag stereotypes |
 | Character card | `character-podcast-v1.png` | 19 | filtered-photo anatomy, dark garment carpet, hand errors |
 | Landmark | `landmark-loose-v3.png` | 19 | centered postcard symmetry or complete secondary geometry |
 | Manuscript story | `text-manuscript-loose-v3.png` | 19 | equal beat completion, wrong chronology, invented events |
@@ -42,6 +43,7 @@ The 18-point assets are structural or semantic baselines, not line-and-finish go
 
 - Exact text is verified glyph by glyph. One surgical correction is allowed; a second failure produces a no-text title-safe fallback for covers or article illustrations.
 - A failed letter glyph means the letter itself does not pass; return verified wording separately with a blank writing-zone fallback rather than approximate text.
+- Multilingual notes lock and proofread every script block independently. Without a named primary language, blocks receive comparable visual weight; international themes use neutral relationship cues rather than flags or cultural stereotypes by default.
 - Article frames preserve source roles and one changing anchor. They do not invent facts, statistics, people, products, interfaces, or conclusions.
 - Covers are independently recomposed for each ratio and never created by crop, pad, stretch, or letterbox reuse.
 - Charts and tables protect every value, unit, order, encoding, and cell relationship. Their irregularity belongs only on harmless lines, fills, spacing, and paper.
@@ -57,6 +59,6 @@ After a shared-rule change:
 5. correct the lowest-scoring dimension at most once;
 6. record a new boundary only when the result is repeatable and replaces, rather than accumulates beside, an older sample.
 
-## Stable v1.1 rule
+## Stable v1 rule
 
-Do not add a new universal rule for a one-off generation accident. Update Boluobao v1.1 only when a failure is reproducible, affects a public invocation route, or invalidates a current retained boundary.
+Do not add a new universal rule for a one-off generation accident. Update Boluobao only when a failure is reproducible, affects a public invocation route, or invalidates a current retained boundary.

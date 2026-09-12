@@ -63,15 +63,16 @@ A manuscript story page targets **19/20** only when:
 5. at least four narrative-safe error families remain visible while arrows and event order stay correct;
 6. there is no invented destination, extra event, unused bubble, pseudo-writing, realistic storyboard finish, or equally complete background in every beat.
 
-## Handwritten-letter gate
+## Handwritten-note and letter gate
 
-A Chinese, English, or bilingual letter targets **19/20** only when:
+A Chinese, English, Japanese, bilingual, or multilingual note or letter targets **19/20** only when:
 
 1. every requested glyph, word, capitalization choice, number, punctuation mark, language, and line break is exact, with no extra writing;
 2. title, optional date, body, and optional note read as one person's hand through compatible pen angle, pressure, endings, and tempo;
 3. at least three local irregularity families are visible without global wobble: baseline drift, width or x-height change, optical-center or slant change, spacing imbalance, pressure jump, retrace, or terminal overshoot;
-4. Chinese width, height, and optical-center variation preserves radicals and recognition; English x-height and slant variation preserves spelling, case, and confused-letter distinctions;
-5. hierarchy is readable and decorations remain subordinate to the text;
-6. warm paper, near-black soft pen, and limited matte pencil accents remain physical without ruled-paper, font-rendering, calligraphy, or vintage-filter polish;
-7. there is no crossed-out replacement, duplicate letter, malformed glyph, invented signature, text-bearing stamp, logo, watermark, or unrelated decoration;
-8. if one surgical correction still leaves any requested text wrong, the result is not a letter pass; return the verified wording separately and deliver a blank writing-zone fallback with status `blank-fallback` rather than approximate text.
+4. Chinese width, height, and optical-center variation preserves radicals and recognition; English x-height and slant variation preserves spelling, case, and confused-letter distinctions; Japanese variation preserves kanji, kana, okurigana, small kana, long-vowel marks, dakuten, handakuten, punctuation, and embedded Latin tokens;
+5. when several languages appear, each block is proofread independently and shares one hand system; a named primary language leads, while an unspecified primary produces comparable size, contrast, and spatial importance across blocks;
+6. hierarchy is readable and decorations remain subordinate to the text;
+7. warm paper, near-black soft pen, and limited matte pencil accents remain physical without ruled-paper, font-rendering, calligraphy, or vintage-filter polish;
+8. there is no crossed-out replacement, duplicate letter, malformed glyph, invented signature, text-bearing stamp, logo, watermark, unrelated decoration, unrequested flag, flag-color coding, national costume, or cultural stereotype;
+9. if one surgical correction still leaves any requested text wrong, the result is not a letter pass; return the verified wording separately and deliver a blank writing-zone fallback with status `blank-fallback` rather than approximate text.

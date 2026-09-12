@@ -64,6 +64,21 @@
       "expected_count": 1,
       "expected_ratio": "16:9",
       "must_lock_data": ["headers", "rows", "columns", "cell_membership", "values", "order"]
+    },
+    {
+      "id": "multilingual-handwritten-note",
+      "request": "创作一张 4:5 便签，表达想结交不同国家的 AI 爱好者，使用英文、日文和中文，未指定主语言。",
+      "expected_entry": "direct-subject-generation",
+      "expected_mode": "handwritten-journal-note",
+      "expected_count": 1,
+      "expected_ratio": "4:5",
+      "expected_hierarchy": "equal",
+      "must_lock_text_blocks": [
+        "I'd love to connect with AI enthusiasts from around the world.",
+        "世界中のAI好きな人たちとつながりたいです。",
+        "想认识来自世界各地的 AI 爱好者。"
+      ],
+      "must_avoid": ["flags", "flag-color-coding", "cultural-stereotypes", "invented-writing"]
     }
   ],
   "exact_text_policy": {

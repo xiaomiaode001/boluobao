@@ -227,8 +227,8 @@ def validate(root: Path) -> list[str]:
 
     if manifest.get("schema_version") != 1:
         failures.append("test manifest schema_version must be 1")
-    if manifest.get("package_version") != "1.2.0":
-        failures.append("test manifest package_version must be 1.2.0")
+    if manifest.get("package_version") != "1.2.1":
+        failures.append("test manifest package_version must be 1.2.1")
     style_references = manifest.get("style_references", [])
     samples = manifest.get("samples", [])
     if len(style_references) != 8:
@@ -241,8 +241,8 @@ def validate(root: Path) -> list[str]:
             failures.append(f"missing manifest resource: {relative}")
 
     showcase_files = manifest.get("showcase_files", [])
-    if len(showcase_files) != 12:
-        failures.append(f"expected 12 GitHub showcase images, found {len(showcase_files)}")
+    if len(showcase_files) != 13:
+        failures.append(f"expected 13 GitHub showcase images, found {len(showcase_files)}")
     expected_showcase_layout = {
         "case_studies": {"count": 8, "width": 720, "height": 900, "ratio_label": "4:5"},
         "capability_boards": {
@@ -251,10 +251,19 @@ def validate(root: Path) -> list[str]:
             "height": 675,
             "ratio_label": "16:9",
         },
+        "standalone_notes": {
+            "count": 1,
+            "width": 720,
+            "height": 900,
+            "ratio_label": "4:5",
+        },
     }
     showcase_layout = manifest.get("showcase_layout", {})
     if showcase_layout != expected_showcase_layout:
-        failures.append("showcase_layout must define 8 aligned 4:5 cases and 4 aligned 16:9 boards")
+        failures.append(
+            "showcase_layout must define 8 aligned 4:5 cases, 4 aligned 16:9 "
+            "boards, and 1 standalone 4:5 note"
+        )
     readme_text = readme.read_text(encoding="utf-8") if readme.is_file() else ""
     for fragment in (
         "~/.claude/skills/boluobao/",
@@ -335,6 +344,7 @@ def validate(root: Path) -> list[str]:
                     )
 
     showcase_bytes = 0
+    showcase_counts: dict[str, int] = defaultdict(int)
     for relative in showcase_files:
         path = root / relative
         if not path.is_file():
@@ -346,7 +356,13 @@ def validate(root: Path) -> list[str]:
             failures.append(f"showcase image is not displayed in README.md: {relative}")
         if path.stat().st_size > 150 * 1024:
             failures.append(f"showcase image exceeds 150 KB: {relative}")
-        group = "capability_boards" if path.name.startswith("capability-") else "case_studies"
+        if path.name == "trilingual-ai-friends-note.webp":
+            group = "standalone_notes"
+        elif path.name.startswith("capability-"):
+            group = "capability_boards"
+        else:
+            group = "case_studies"
+        showcase_counts[group] += 1
         expected = expected_showcase_layout[group]
         try:
             width, height = webp_size(path)
@@ -359,6 +375,12 @@ def validate(root: Path) -> list[str]:
                     f"{expected['width']}x{expected['height']} for {group}"
                 )
         showcase_bytes += path.stat().st_size
+    for group, expected in expected_showcase_layout.items():
+        if showcase_counts[group] != expected["count"]:
+            failures.append(
+                f"showcase group {group} has {showcase_counts[group]} files, "
+                f"expected {expected['count']}"
+            )
     if showcase_bytes > 1024 * 1024:
         failures.append("GitHub showcase images exceed 1 MB total")
 
@@ -381,10 +403,11 @@ def validate(root: Path) -> list[str]:
                 "image-style-reconstruction",
                 "data-bar-chart",
                 "compact-data-table",
+                "multilingual-handwritten-note",
             }
             case_ids = {case.get("id") for case in cases}
-            if len(cases) != 7 or case_ids != expected_case_ids:
-                failures.append("invocation cases must contain the seven v1.1 routing scenarios")
+            if len(cases) != 8 or case_ids != expected_case_ids:
+                failures.append("invocation cases must contain the eight v1.2.1 routing scenarios")
             case_by_id = {case.get("id"): case for case in cases}
             generic = case_by_id.get("generic-social-cover", {})
             if generic.get("expected_ratio") != "4:5":
@@ -401,6 +424,31 @@ def validate(root: Path) -> list[str]:
             table = case_by_id.get("compact-data-table", {})
             if table.get("expected_mode") != "data-table" or table.get("expected_ratio") != "16:9":
                 failures.append("table request must route to one 16:9 compact data table")
+            multilingual = case_by_id.get("multilingual-handwritten-note", {})
+            if (
+                multilingual.get("expected_entry") != "direct-subject-generation"
+                or multilingual.get("expected_mode") != "handwritten-journal-note"
+                or multilingual.get("expected_count") != 1
+                or multilingual.get("expected_ratio") != "4:5"
+                or multilingual.get("expected_hierarchy") != "equal"
+            ):
+                failures.append("multilingual note must route to one equal-weight 4:5 note")
+            locked_blocks = multilingual.get("must_lock_text_blocks", [])
+            expected_blocks = [
+                "I'd love to connect with AI enthusiasts from around the world.",
+                "世界中のAI好きな人たちとつながりたいです。",
+                "想认识来自世界各地的 AI 爱好者。",
+            ]
+            if locked_blocks != expected_blocks:
+                failures.append("multilingual note text blocks must remain exact")
+            required_avoids = {
+                "flags",
+                "flag-color-coding",
+                "cultural-stereotypes",
+                "invented-writing",
+            }
+            if not required_avoids.issubset(set(multilingual.get("must_avoid", []))):
+                failures.append("multilingual note must avoid flag and stereotype shortcuts")
             policy = invocation.get("exact_text_policy", {})
             if policy.get("maximum_surgical_corrections") != 1:
                 failures.append("exact-text policy must allow exactly one surgical correction")

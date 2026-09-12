@@ -1,6 +1,6 @@
 ---
 name: boluobao
-description: Plan and create warm-paper, ink-and-colored-pencil editorial illustrations, social covers, handwritten notes, image reconstructions, food, people, scenes, landscapes, landmarks, charts, and compact tables. Use when a user asks for boluobao, article illustrations, a social cover, a handwritten visual, a warm journal-like redesign, or phrases such as “为我的内容进行配图”, “为这篇文章生成封面”, or “帮我将这个图片用 boluobao 进行设计”.
+description: Plan and create warm-paper, ink-and-colored-pencil editorial illustrations, social covers, multilingual handwritten notes, image reconstructions, food, people, scenes, landscapes, landmarks, charts, and compact tables. Use when a user asks for boluobao, article illustrations, a social cover, a handwritten visual, a warm journal-like redesign, or phrases such as “为我的内容进行配图”, “为这篇文章生成封面”, “做一张多语便签”, or “帮我将这个图片用 boluobao 进行设计”.
 ---
 
 # Boluobao for Claude Code

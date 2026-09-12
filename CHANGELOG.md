@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## v1.2.1 — 2026-09-12
+
+### Added
+
+- Added Chinese-English-Japanese and general multilingual handwritten-note routing, script-specific text locks, and an equal-hierarchy fallback when no primary language is named.
+- Added an `English + Japanese + Chinese` invocation regression case and a lightweight aligned `4:5` GitHub showcase proof.
+
+### Changed
+
+- Extended exact-text validation to Japanese kana, kanji, diacritics, punctuation, and embedded Latin tokens such as `AI`.
+- Added neutral international-connection cues and excluded unrequested flags, flag-color coding, national dress, and cultural stereotypes.
+- Updated Codex interface metadata, the Claude Code bridge, manifests, and package validation for the maintained capability.
+
 ## v1.2.0 — 2026-08-31
 
 ### Added

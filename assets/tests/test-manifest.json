@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "package_version": "1.2.0",
+  "package_version": "1.2.1",
   "max_package_mb": 60,
   "style_references": [
     "assets/references/01-fashion-page.jpg",
@@ -58,7 +58,8 @@
     "docs/showcase/capability-notes-16x9.webp",
     "docs/showcase/capability-social-covers-16x9.webp",
     "docs/showcase/capability-editorial-16x9.webp",
-    "docs/showcase/capability-data-16x9.webp"
+    "docs/showcase/capability-data-16x9.webp",
+    "docs/showcase/trilingual-ai-friends-note.webp"
   ],
   "showcase_layout": {
     "case_studies": {
@@ -72,6 +73,12 @@
       "width": 1200,
       "height": 675,
       "ratio_label": "16:9"
+    },
+    "standalone_notes": {
+      "count": 1,
+      "width": 720,
+      "height": 900,
+      "ratio_label": "4:5"
     }
   },
   "samples": [
