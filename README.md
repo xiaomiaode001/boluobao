@@ -160,15 +160,43 @@ The following cases pair an original scene with a Boluobao reconstruction to dem
 
 ### Codex
 
-将仓库克隆或复制到 Codex Skills 目录，并确保目录名为 `boluobao`：
+#### 方法一：直接复制到 Codex（推荐） / Paste into Codex (Recommended)
 
-Clone or copy the repository into the Codex Skills directory and keep the folder name `boluobao`:
+新手不需要先下载 ZIP、打开终端或手动查找 Skills 目录。复制下面的中文指令，直接发送给 Codex：
+
+Beginners do not need to download a ZIP, open a terminal, or locate the Skills directory manually. Copy either prompt below directly into Codex.
 
 ```text
-~/.codex/skills/boluobao/
+请使用内置的 $skill-installer，从 GitHub 仓库 https://github.com/xiaomiaode001/boluobao 的仓库根目录安装 Skill，安装名称保持为 boluobao。目标位置使用当前用户的 $CODEX_HOME/skills；如果没有设置 CODEX_HOME，则使用 ~/.codex/skills。安装前先检查目标目录：如果 boluobao 已经存在，不要覆盖、删除或修改其中内容，只报告当前状态并告诉我安全更新方式。安装完成后验证 SKILL.md，并告诉我从下一轮开始如何使用 $boluobao。
 ```
 
-#### Windows（PowerShell）
+English copy-paste prompt:
+
+```text
+Use the built-in $skill-installer to install the Skill from the repository root of https://github.com/xiaomiaode001/boluobao, keeping the installed name as boluobao. Install it under the current user's $CODEX_HOME/skills, or ~/.codex/skills when CODEX_HOME is not set. Check the destination first: if boluobao already exists, do not overwrite, delete, or modify it; report its status and explain the safe update path. After installation, validate SKILL.md and tell me how to use $boluobao from the next turn.
+```
+
+安装成功后，从下一轮开始可以直接这样调用：
+
+After installation, use it from the next turn with prompts such as:
+
+```text
+使用 $boluobao 为这篇文章规划并生成配图。
+使用 $boluobao 为我的内容生成社媒封面。
+使用 $boluobao 重新设计这张图片，并保留主体关系。
+```
+
+如果下一轮仍未显示 Skill，请重新开启一个 Codex 会话。安装过程中如需联网或写入 Skills 目录，Codex 会正常请求你的授权。
+
+If the Skill is not visible on the next turn, start a new Codex session. Codex may ask for approval when network access or a write to the Skills directory is required.
+
+#### 方法二：手动安装 / Manual Installation
+
+如果更习惯终端，可以把仓库浅克隆到 Codex Skills 目录，并确保目录名为 `boluobao`。
+
+If you prefer a terminal, shallow-clone the repository into the Codex Skills directory and keep the folder name `boluobao`.
+
+##### Windows（PowerShell）
 
 ```powershell
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex\skills" | Out-Null
@@ -176,7 +204,7 @@ git clone --depth 1 https://github.com/xiaomiaode001/boluobao.git "$env:USERPROF
 python -X utf8 "$env:USERPROFILE\.codex\skills\boluobao\scripts\validate_package.py"
 ```
 
-#### macOS / Linux
+##### macOS / Linux
 
 ```bash
 mkdir -p "$HOME/.codex/skills"
@@ -184,9 +212,9 @@ git clone --depth 1 https://github.com/xiaomiaode001/boluobao.git "$HOME/.codex/
 python3 -X utf8 "$HOME/.codex/skills/boluobao/scripts/validate_package.py"
 ```
 
-如果设置了自定义 `CODEX_HOME`，请把示例中的 `$HOME/.codex` 或 `$env:USERPROFILE\.codex` 替换为该目录。首次安装后新开一个 Codex 会话，即可直接使用自然语言调用，也可以显式使用 `$boluobao`。`agents/openai.yaml` 已启用隐式调用并配置菠萝包品牌图标。
+如果设置了自定义 `CODEX_HOME`，请把示例中的 `$HOME/.codex` 或 `$env:USERPROFILE\.codex` 替换为该目录。安装后可以直接自然语言调用，也可以显式使用 `$boluobao`。`agents/openai.yaml` 已启用隐式调用并配置菠萝包品牌图标。
 
-If you use a custom `CODEX_HOME`, replace `$HOME/.codex` or `$env:USERPROFILE\.codex` in the examples with that directory. Start a new Codex session after the first installation, then use natural-language requests or invoke `$boluobao` explicitly. `agents/openai.yaml` enables implicit invocation and configures the pineapple-bun brand icon.
+If you use a custom `CODEX_HOME`, replace `$HOME/.codex` or `$env:USERPROFILE\.codex` in the examples with that directory. After installation, use natural-language requests or invoke `$boluobao` explicitly. `agents/openai.yaml` enables implicit invocation and configures the pineapple-bun brand icon.
 
 目标目录已存在时不要重复运行 `git clone`，请使用下面的更新命令。
 

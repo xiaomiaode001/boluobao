@@ -293,6 +293,11 @@ def validate(root: Path) -> list[str]:
         if fragment not in readme_text:
             failures.append(f"README.md missing Claude Code usage: {fragment}")
     for fragment in (
+        "请使用内置的 $skill-installer",
+        "Use the built-in $skill-installer",
+        "https://github.com/xiaomiaode001/boluobao",
+        "如果 boluobao 已经存在，不要覆盖、删除或修改其中内容",
+        "from the next turn",
         "git clone --depth 1 https://github.com/xiaomiaode001/boluobao.git",
         "$env:USERPROFILE\\.codex\\skills\\boluobao",
         "$HOME/.codex/skills/boluobao",

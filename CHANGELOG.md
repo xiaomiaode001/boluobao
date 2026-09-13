@@ -5,6 +5,7 @@
 ### Documentation
 
 - Added copy-ready Codex installation, validation, and update commands for Windows PowerShell, macOS, and Linux.
+- Added a beginner-first prompt that can be pasted directly into Codex to install Boluobao through the built-in `$skill-installer`, with safe handling for an existing destination.
 - Added bilingual contributor guidelines covering contribution scope, stable-rule boundaries, asset rights, validation, and pull-request expectations.
 
 ## v1.2.1 — 2026-09-12
