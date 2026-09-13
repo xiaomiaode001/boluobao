@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Documentation
+
+- Added copy-ready Codex installation, validation, and update commands for Windows PowerShell, macOS, and Linux.
+
 ## v1.2.1 — 2026-09-12
 
 ### Added

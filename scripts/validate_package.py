@@ -272,6 +272,15 @@ def validate(root: Path) -> list[str]:
     ):
         if fragment not in readme_text:
             failures.append(f"README.md missing Claude Code usage: {fragment}")
+    for fragment in (
+        "git clone --depth 1 https://github.com/xiaomiaode001/boluobao.git",
+        "$env:USERPROFILE\\.codex\\skills\\boluobao",
+        "$HOME/.codex/skills/boluobao",
+        "scripts\\validate_package.py",
+        "pull --ff-only",
+    ):
+        if fragment not in readme_text:
+            failures.append(f"README.md missing Codex installation guidance: {fragment}")
 
     expected_project_hero = {
         "file": "docs/showcase/boluobao-hero-16x9.webp",

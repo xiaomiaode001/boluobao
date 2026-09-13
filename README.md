@@ -167,9 +167,45 @@ Clone or copy the repository into the Codex Skills directory and keep the folder
 ~/.codex/skills/boluobao/
 ```
 
-安装后可以直接自然语言调用，也可以显式使用 `$boluobao`。`agents/openai.yaml` 已启用隐式调用并配置菠萝包品牌图标。
+#### Windows（PowerShell）
 
-After installation, use natural-language requests or invoke `$boluobao` explicitly. `agents/openai.yaml` enables implicit invocation and configures the pineapple-bun brand icon.
+```powershell
+New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex\skills" | Out-Null
+git clone --depth 1 https://github.com/xiaomiaode001/boluobao.git "$env:USERPROFILE\.codex\skills\boluobao"
+python -X utf8 "$env:USERPROFILE\.codex\skills\boluobao\scripts\validate_package.py"
+```
+
+#### macOS / Linux
+
+```bash
+mkdir -p "$HOME/.codex/skills"
+git clone --depth 1 https://github.com/xiaomiaode001/boluobao.git "$HOME/.codex/skills/boluobao"
+python3 -X utf8 "$HOME/.codex/skills/boluobao/scripts/validate_package.py"
+```
+
+如果设置了自定义 `CODEX_HOME`，请把示例中的 `$HOME/.codex` 或 `$env:USERPROFILE\.codex` 替换为该目录。首次安装后新开一个 Codex 会话，即可直接使用自然语言调用，也可以显式使用 `$boluobao`。`agents/openai.yaml` 已启用隐式调用并配置菠萝包品牌图标。
+
+If you use a custom `CODEX_HOME`, replace `$HOME/.codex` or `$env:USERPROFILE\.codex` in the examples with that directory. Start a new Codex session after the first installation, then use natural-language requests or invoke `$boluobao` explicitly. `agents/openai.yaml` enables implicit invocation and configures the pineapple-bun brand icon.
+
+目标目录已存在时不要重复运行 `git clone`，请使用下面的更新命令。
+
+If the target directory already exists, do not run `git clone` again; use the update command below.
+
+更新已安装版本 / Update an existing installation:
+
+```powershell
+# Windows PowerShell
+git -C "$env:USERPROFILE\.codex\skills\boluobao" pull --ff-only
+```
+
+```bash
+# macOS / Linux
+git -C "$HOME/.codex/skills/boluobao" pull --ff-only
+```
+
+Skill 本身不需要 npm、pip 或第三方字体依赖。生成图片时仍需当前 Codex 环境提供可用的图片生成或编辑工具。
+
+The Skill itself requires no npm package, pip package, or third-party font. Pixel generation still requires an image-generation or image-editing tool available in the active Codex environment.
 
 ### Claude Code
 
