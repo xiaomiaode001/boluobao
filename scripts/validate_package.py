@@ -93,6 +93,7 @@ def validate(root: Path) -> list[str]:
     root = root.resolve()
     skill_md = root / "SKILL.md"
     readme = root / "README.md"
+    contributing = root / "CONTRIBUTING.md"
     apache_license = root / "LICENSE"
     cc_license = root / "LICENSES" / "CC-BY-4.0.txt"
     asset_terms = root / "ASSETS-LICENSE.md"
@@ -118,10 +119,29 @@ def validate(root: Path) -> list[str]:
         markdown_files.append(readme)
     else:
         failures.append("missing GitHub README.md")
+    if contributing.is_file():
+        markdown_files.append(contributing)
+    else:
+        failures.append("missing CONTRIBUTING.md")
     for markdown in markdown_files:
         for target in relative_links(markdown):
             if not target.exists():
                 failures.append(f"broken Markdown link in {markdown.relative_to(root)}: {target}")
+
+    if contributing.is_file():
+        contributing_text = contributing.read_text(encoding="utf-8")
+        for fragment in (
+            "assets/tests/invocation-cases.json",
+            "references/forward-tests.md",
+            "ASSETS-LICENSE.md",
+            "Apache-2.0",
+            "final-only",
+            "60 MB",
+            "scripts/validate_package.py",
+            "git diff --check",
+        ):
+            if fragment not in contributing_text:
+                failures.append(f"CONTRIBUTING.md missing project boundary: {fragment}")
 
     if not apache_license.is_file():
         failures.append("missing root Apache-2.0 LICENSE")
@@ -281,6 +301,8 @@ def validate(root: Path) -> list[str]:
     ):
         if fragment not in readme_text:
             failures.append(f"README.md missing Codex installation guidance: {fragment}")
+    if "[CONTRIBUTING.md](CONTRIBUTING.md)" not in readme_text:
+        failures.append("README.md must link to CONTRIBUTING.md")
 
     expected_project_hero = {
         "file": "docs/showcase/boluobao-hero-16x9.webp",

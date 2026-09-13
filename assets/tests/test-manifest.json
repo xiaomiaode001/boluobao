@@ -14,6 +14,7 @@
   ],
   "support_files": [
     "README.md",
+    "CONTRIBUTING.md",
     ".gitignore",
     "LICENSE",
     "NOTICE",

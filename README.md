@@ -27,7 +27,8 @@
 
 <p align="center">
   <a href="#中文介绍">中文</a> · <a href="#english-introduction">English</a> ·
-  <a href="#能力展示--capability-gallery">Gallery</a> · <a href="#快速开始--quick-start">Quick Start</a>
+  <a href="#能力展示--capability-gallery">Gallery</a> · <a href="#快速开始--quick-start">Quick Start</a> ·
+  <a href="#参与贡献--contributing">Contributing</a>
 </p>
 
 ## 中文介绍
@@ -289,9 +290,16 @@ boluobao/
 ├── references/               # Mode-specific rules and quality gates
 ├── scripts/                  # Archive, validation, and Claude sync tools
 ├── ASSETS-LICENSE.md         # Asset-specific licensing boundaries
+├── CONTRIBUTING.md           # Contributor workflow and review boundaries
 ├── CHANGELOG.md
 └── LICENSE
 ```
+
+## 参与贡献 / Contributing
+
+欢迎提交可复现的调用回归、针对性规则修正、校验与跨平台改进，以及安装、翻译和可访问性文档。涉及新模式、共享画风规则、依赖或素材授权的变更，请先创建 Issue。完整流程、测试命令、素材边界和 PR 检查清单见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+Reproducible invocation regressions, focused rule corrections, validation and cross-platform improvements, and installation, translation, or accessibility documentation are welcome. Open an issue first for changes involving a new mode, shared style rule, dependency, or asset license. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow, tests, asset boundaries, and pull-request checklist.
 
 ## 许可证 / Licensing
 

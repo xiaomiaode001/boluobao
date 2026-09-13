@@ -10,7 +10,7 @@ Unless a file states otherwise, Apache-2.0 applies to the project-authored softw
 - `agents/`;
 - `scripts/`;
 - project-authored Markdown under `references/`;
-- `README.md`, `.gitignore`, JSON manifests, and Markdown content maps under `assets/tests/`.
+- `README.md`, `CONTRIBUTING.md`, `.gitignore`, JSON manifests, and Markdown content maps under `assets/tests/`.
 
 ## CC BY 4.0 test images
 
