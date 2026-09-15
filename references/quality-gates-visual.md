@@ -1,6 +1,6 @@
 # Visual Subject Quality Gates
 
-Read this file with the base [quality rubric](quality-rubric.md) for food, scenes, landscapes, landmarks, and people.
+Read this file with the base [quality rubric](quality-rubric.md) for food, scenes, landscapes, landmarks, people, and pet portraits.
 
 ## Single-food gate
 
@@ -76,3 +76,16 @@ A chest-up or waist-up person targets **19/20** only when:
 6. large hair and clothing masses retain directional grain and paper exposure without texture carpet or pseudo-graphics;
 7. line character, silhouette simplification, physical-media feel, and exclusions each score `2`;
 8. there is no extra person, complete room inventory, logo, watermark, copied wording, pseudo-writing, or invented garment or device symbol.
+
+## Pet-portrait gate
+
+A pet or companion-animal portrait targets **19/20** only when:
+
+1. species or breed-type silhouette, individual head and muzzle relationship, head angle, pose, expression, subject count, and 3–7 diagnostic coat zones remain recognizable without a label;
+2. eye count, scale, spacing, alignment, gaze direction, iris color family, pupil shape, and source-visible expression remain coherent, with no extra eye, crossed gaze, malformed pupil, or changed health cue;
+3. irises read as matte colored-pencil fields with sparse diagnostic marks and small paper catchlights rather than photographic reflections, glossy glass spheres, smooth gradients, or anime enlargement;
+4. the face is organized through a few coat and value zones; nose, mouth, eye corners, whisker roots, teeth, and tongue stay protected while repeated fur is reduced to broad masses and representative tufts;
+5. outer head, ear, body, chest, and paw contours are mostly continuous and heavier than face, coat, and whisker interiors, with no stitched perimeter, dense scratch carpet, full echo outline, or bright wire-whisker net;
+6. visible ear, limb, paw, tail, and whisker ownership remains correct, with no added anatomy, floating pad, shadow limb, or humanized expression;
+7. one animal occupies roughly 58–72% of the canvas, at most two background fragments remain incomplete, active warm paper survives, and at least three error families occur only on safe outer fur, body edges, fills, shadow, or background;
+8. there is no photorealistic eye or fur rendering, mascot treatment, anime, chibi, generic caricature, invented name or breed label, speech bubble, pseudo-writing, logo, watermark, collar, costume, or prop absent from the request.

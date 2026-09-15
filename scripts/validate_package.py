@@ -437,13 +437,14 @@ def validate(root: Path) -> list[str]:
                 "generic-social-cover",
                 "platform-cover-set",
                 "image-style-reconstruction",
+                "pet-portrait-reconstruction",
                 "data-bar-chart",
                 "compact-data-table",
                 "multilingual-handwritten-note",
             }
             case_ids = {case.get("id") for case in cases}
-            if len(cases) != 8 or case_ids != expected_case_ids:
-                failures.append("invocation cases must contain the eight v1.2.1 routing scenarios")
+            if len(cases) != 9 or case_ids != expected_case_ids:
+                failures.append("invocation cases must contain the nine maintained routing scenarios")
             case_by_id = {case.get("id"): case for case in cases}
             generic = case_by_id.get("generic-social-cover", {})
             if generic.get("expected_ratio") != "4:5":
@@ -454,6 +455,42 @@ def validate(root: Path) -> list[str]:
             multi = case_by_id.get("multi-paragraph-article", {})
             if multi.get("expected_count_min") != 2 or multi.get("expected_count_max") != 3:
                 failures.append("multi-paragraph article must route to two or three images")
+            pet = case_by_id.get("pet-portrait-reconstruction", {})
+            if (
+                pet.get("expected_entry") != "image-to-boluobao-design"
+                or pet.get("expected_mode") != "pet-portrait"
+                or pet.get("expected_count") != 1
+                or pet.get("must_read") != "references/animal-and-pet-recipes.md"
+                or pet.get("maximum_targeted_corrections") != 1
+            ):
+                failures.append("pet portrait must route to one identity-preserving reconstruction")
+            required_pet_preserve = {
+                "subject_count",
+                "species_or_breed_type",
+                "identity",
+                "pose",
+                "expression",
+                "eye_relationship",
+                "muzzle_and_ear_structure",
+                "diagnostic_coat_zones",
+                "paw_ownership",
+            }
+            if not required_pet_preserve.issubset(set(pet.get("must_preserve", []))):
+                failures.append("pet portrait identity locks are incomplete")
+            required_eye_locks = {"count", "scale", "spacing", "gaze", "iris_hue", "pupil_shape"}
+            if not required_eye_locks.issubset(set(pet.get("eye_lock", []))):
+                failures.append("pet portrait eye locks are incomplete")
+            required_pet_avoids = {
+                "glossy-eyes",
+                "photorealistic-fur",
+                "anime-eyes",
+                "chibi",
+                "humanized-expression",
+                "extra-anatomy",
+                "pseudo-writing",
+            }
+            if not required_pet_avoids.issubset(set(pet.get("must_avoid", []))):
+                failures.append("pet portrait exclusions are incomplete")
             chart = case_by_id.get("data-bar-chart", {})
             if chart.get("expected_mode") != "data-chart" or chart.get("expected_ratio") != "16:9":
                 failures.append("bar-chart request must route to one 16:9 data chart")

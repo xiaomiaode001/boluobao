@@ -48,6 +48,37 @@
       "must_reconstruct": true
     },
     {
+      "id": "pet-portrait-reconstruction",
+      "request": "帮我将这张宠物近景用 boluobao 进行设计，并让眼睛、面部和线条更有手绘个性；保留同一只宠物的身份、表情和姿势。",
+      "expected_entry": "image-to-boluobao-design",
+      "expected_mode": "pet-portrait",
+      "expected_count": 1,
+      "must_read": "references/animal-and-pet-recipes.md",
+      "must_preserve": [
+        "subject_count",
+        "species_or_breed_type",
+        "identity",
+        "pose",
+        "expression",
+        "eye_relationship",
+        "muzzle_and_ear_structure",
+        "diagnostic_coat_zones",
+        "paw_ownership"
+      ],
+      "eye_lock": ["count", "scale", "spacing", "gaze", "iris_hue", "pupil_shape"],
+      "must_simplify": ["iris_detail", "facial_fur", "coat_repetition", "whiskers", "background"],
+      "must_avoid": [
+        "glossy-eyes",
+        "photorealistic-fur",
+        "anime-eyes",
+        "chibi",
+        "humanized-expression",
+        "extra-anatomy",
+        "pseudo-writing"
+      ],
+      "maximum_targeted_corrections": 1
+    },
+    {
       "id": "data-bar-chart",
       "request": "用 boluobao 将这些数据做成柱状图：立即 62%，短思考 74%，深思考 86%。",
       "expected_entry": "text-or-data-to-graphic",

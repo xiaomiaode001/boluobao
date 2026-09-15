@@ -13,6 +13,7 @@ Use these boundaries only after changing shared style, routing, text, or validat
 | English letter | `letter-english-v2.png` | 19 | uniform x-height/slant or ambiguous letterforms |
 | Multilingual note | `docs/showcase/trilingual-ai-friends-note.webp` | 19 | unequal language hierarchy, Japanese mark loss, mixed-script token drift, flag stereotypes |
 | Character card | `character-podcast-v1.png` | 19 | filtered-photo anatomy, dark garment carpet, hand errors |
+| Pet portrait | `invocation-cases.json#pet-portrait-reconstruction` (behavioral regression; no public media retained) | rule-only | glossy eyes, hair-by-hair fur, generic cartoon face, identity drift |
 | Landmark | `landmark-loose-v3.png` | 19 | centered postcard symmetry or complete secondary geometry |
 | Manuscript story | `text-manuscript-loose-v3.png` | 19 | equal beat completion, wrong chronology, invented events |
 | Article social series | `editorial-reasoning-01-16x9-v2.png`, `editorial-reasoning-02-16x9-v3.png`, `editorial-reasoning-03-16x9-v2.png` | 19 | cosmetic variants, generic infographic, excessive cue families |
@@ -38,6 +39,7 @@ The 18-point assets are structural or semantic baselines, not line-and-finish go
 - Landscapes use three depth bands, at most two strong pencil masses, and representative natural groups.
 - Manuscript pages develop only the emotional-turn beat; at least two secondary beats stay below half its information.
 - Close-up people protect faces and hands while moving irregularity to hair, clothing, furniture, props, and incomplete background fragments.
+- Pet portraits lock gaze, pupil shape, muzzle, ears, pose, expression, and 3–7 coat zones; personality comes from matte irises, representative fur, line hierarchy, and one or two safe asymmetries rather than glossy eyes, hair-by-hair rendering, or caricature.
 
 ### Text and content
 

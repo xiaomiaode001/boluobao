@@ -5,7 +5,7 @@ Use this base rubric for every Boluobao result. Score each dimension `0`, `1`, o
 After this file, read exactly one matching gate file:
 
 - [Content and text gates](quality-gates-content.md): editorial illustration, article social series, platform covers, data charts, compact tables, manuscript story pages, and handwritten letters.
-- [Visual subject gates](quality-gates-visual.md): single food, scenes, landscapes, landmarks, character portraits, and close-up characters.
+- [Visual subject gates](quality-gates-visual.md): single food, scenes, landscapes, landmarks, character portraits, close-up characters, and pet portraits.
 - Modes without a dedicated gate use this base rubric and the closest recipe-specific constraints.
 
 | Dimension | 0 | 1 | 2 |
@@ -28,6 +28,8 @@ After this file, read exactly one matching gate file:
 - **Procedural wobble:** remove global jitter; concentrate errors at stroke restarts, overlaps, corners, and hand-position changes.
 - **Stitched contour:** reconnect most of the edge into one confident stroke; retain only a few localized restarts and remove periodic gaps or full-perimeter echoes.
 - **Overloaded interior ink:** retain only diagnostic folds, ingredients, rings, or facial relationships; let colored-pencil blocks carry texture and volume.
+- **Glassy pet eyes:** flatten each iris into one matte pencil field with sparse irregular marks and a small paper catchlight; preserve scale, spacing, gaze, iris hue, and pupil shape.
+- **Hair-by-hair pet rendering:** restore 3–7 diagnostic coat zones, replace repeated strands with broad directional masses and a few representative tufts, and keep the outer silhouette heavier than face and coat interiors.
 - **Errors everywhere:** restore clean anchors around the silhouette and protected features; keep mistakes local and asymmetric.
 - **Too tidy or too chaotic:** offset one cluster or baseline when tidy; remove one motif and reopen quiet paper when chaotic.
 - **Texture filter only:** rebuild simplified shapes and perspective instead of overlaying paper grain.
