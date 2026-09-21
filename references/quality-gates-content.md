@@ -30,6 +30,18 @@ A social cover or platform set targets **19/20** only when:
 
 For a generic social cover with no named platform, verify a true portrait `4:5` composition with a flexible central crop.
 
+## Creator-introduction gate
+
+A person-led introduction card targets **19/20** only when:
+
+1. the requested ratio is verified and the title, value proposition, optional closing thought, and contact line follow the source without invented claims or handles;
+2. the person, pose, face-framing accessories, gesture, prop, and any explicitly protected clothing graphic remain recognizable, correctly owned, and unobscured;
+3. title and portrait read before supporting cues, while longer copy stays legible at destination size and no cue family turns into an unrelated icon row;
+4. paper tooth remains active inside directional matte pencil masses; outer contours stay stronger than interior marks and garment texture;
+5. mixed Chinese/Latin tokens, punctuation, and any email address are exact; the address remains whole, legible, and inside safe margins with a literal `@` and no inserted backslash;
+6. the contact zone is planned with the composition rather than pasted across the figure, hands, prop, or requested garment print;
+7. if one surgical text correction still fails, the card is delivered only as a clean text-zone fallback with verified copy outside the image, never as approximate writing.
+
 ## Data-chart gate
 
 A compact chart targets **19/20** only when:

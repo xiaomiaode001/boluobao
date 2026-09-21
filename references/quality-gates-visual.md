@@ -60,9 +60,9 @@ A character portrait targets **19/20** only when:
 3. person count, arm and hand count, wrist ownership, overlap order, contact, and gesture meaning remain coherent;
 4. one hero person uses at most one dominant role prop and two incomplete context fragments;
 5. hero outline is stronger than face, hands, garment, and prop interiors, with no stitched perimeter or modeled skin;
-6. dark garments avoid edge-to-edge equal-density hatching and crisp paper-colored pseudo-graphics;
+6. dark garments avoid edge-to-edge equal-density hatching and invented crisp paper-colored pseudo-graphics; a source-requested garment print retains its diagnostic placement and internal relationships without being covered by later text;
 7. at least three error families occur outside face and hand zones;
-8. warm paper remains active, palette stays within 4–7 earthy colors, and there is no photorealism, anime, chibi, polished comic finish, copied text, logo, watermark, or extra person.
+8. warm paper remains active, palette stays within 4–7 earthy colors, and there is no photorealism, anime, chibi, polished comic finish, copied text, unrequested logo, watermark, or extra person.
 
 ## Close-up-character gate
 

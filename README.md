@@ -33,7 +33,7 @@
 
 ## 中文介绍
 
-**Boluobao** 是一个兼容 Codex 与 Claude Code 的可调用 Skill，为创作者、自媒体作者、教育工作者与独立团队提供稳定、可复用的风格化视觉设计。它能理解文章结构与叙事核心，自动规划适合配图的段落和最少图片数量；也能生成社媒封面、中英日及多语手写便签、食物与场景插画、人物与宠物近景、轻量图表和表格，或将用户提供的照片重构成统一的手账式视觉。
+**Boluobao** 是一个兼容 Codex 与 Claude Code 的可调用 Skill，为创作者、自媒体作者、教育工作者与独立团队提供稳定、可复用的风格化视觉设计。它能理解文章结构与叙事核心，自动规划适合配图的段落和最少图片数量；也能生成社媒封面、创作者介绍图、中英日及多语手写便签、食物与场景插画、人物与宠物近景、轻量图表和表格，或将用户提供的照片重构成统一的手账式视觉。
 
 它不是一个只会套滤镜的提示词，而是一套包含内容规划、构图、文字校对、数据保护、质量评分和交付规则的完整工作流。视觉语言由暖色无涂布纸、深色墨线、半透明彩铅、留白、手写批注和受控的不规则感组成。
 
@@ -41,7 +41,7 @@
 
 ## English Introduction
 
-**Boluobao** is an invokable Skill for Codex and Claude Code, built for creators, social-media publishers, educators, and independent teams who need a consistent, reusable visual language. It reads the structure and narrative core of an article, selects the paragraphs that benefit from illustration, and proposes the smallest useful image set. It can also create multilingual handwritten notes—including Chinese, English, and Japanese—social covers, food and scene illustrations, close-up people and pets, compact charts and tables, or reconstruct a supplied photograph in a coherent journal-like style.
+**Boluobao** is an invokable Skill for Codex and Claude Code, built for creators, social-media publishers, educators, and independent teams who need a consistent, reusable visual language. It reads the structure and narrative core of an article, selects the paragraphs that benefit from illustration, and proposes the smallest useful image set. It can also create creator-introduction cards, multilingual handwritten notes—including Chinese, English, and Japanese—social covers, food and scene illustrations, close-up people and pets, compact charts and tables, or reconstruct a supplied photograph in a coherent journal-like style.
 
 This is more than a filter prompt. Boluobao combines content planning, composition, text verification, data protection, quality scoring, and delivery rules in one workflow. Its visual language uses warm uncoated paper, dark ink contours, translucent colored pencil, purposeful whitespace, handwritten annotations, and controlled imperfection.
 
@@ -61,6 +61,7 @@ The project was inspired by Korean illustrator and author **[이다 (2da / Ida)]
 |---|---|---|---|
 | 文章配图 / Editorial illustration | 识别段落角色、叙事命题与适合配图的位置 | Maps paragraph roles, narrative propositions, and illustration opportunities | `16:9`, 最少必要张数 / minimum useful set |
 | 社媒封面 / Social cover | 为公众号、小红书、X 等平台原生重构，不直接裁切同一母版 | Re-composes natively for WeChat, Xiaohongshu, X, and other platforms | 通用 `4:5`; 平台原生比例 / native ratio |
+| 创作者介绍 / Creator introduction | 将人物、简介与可选联系方式组织成一张纸感介绍图，保护用户要求保留的服饰图案 | Combines a portrait, introduction, and optional contact copy while preserving requested clothing details | 按指定比例，如 `9:16` / requested ratio |
 | 手写便签 / Handwritten note | 锁定中英日及多语文字，分别处理中文重心、英文 x-height 与日文假名节奏 | Locks Chinese, English, Japanese, and multilingual copy while preserving each script's own handwritten rhythm | 单页、双语或多语 / single, bilingual, or multilingual |
 | 图片重构 / Image reconstruction | 保留主体、身份、姿态、视角与关键空间关系 | Preserves subject, identity, pose, viewpoint, and diagnostic spatial relationships | 依输入与用途 / based on input and use |
 | 食物、人物、宠物与场景 / Food, people, pets & scenes | 单体食物、制作流程、近景人物与宠物、景观与地标 | Single food, process boards, close-up people and pets, landscapes, and landmarks | 叙事优先 / narrative-first |
@@ -272,6 +273,9 @@ Redesign this image with boluobao while preserving its subject and composition.
 帮我将这张宠物近景用 boluobao 进行设计，让眼睛、面部和线条更有手绘个性，同时保留同一只宠物的身份、表情和姿势。
 Redesign this pet close-up with boluobao. Give the eyes, face, and linework more hand-drawn personality while preserving the same animal's identity, expression, and pose.
 
+用 boluobao 把我的头像和简介制作成 9:16 创作者介绍图，保留衣服上的原图案，并在底部加入我提供的联系方式。
+Make a 9:16 boluobao creator-introduction card from my portrait and copy; preserve the original shirt graphic and add the contact line I provide.
+
 用 boluobao 把这些数据做成柱状图和紧凑表格。
 Turn this data into a boluobao bar chart and compact table.
 
@@ -295,7 +299,7 @@ For editorial work, Boluobao first returns content roles, a recommended image co
 - The Skill is not intended for photorealistic retouching, clean vector artwork, dense spreadsheets, or unauthorized imitation of a named artist.
 - Gold modes target `19/20`; calibrating modes target at least `18/20`; no deliverable may score below `17/20`.
 
-Detailed rules: [SKILL.md](SKILL.md) · [Style DNA](references/style-dna.md) · [Quality rubric](references/quality-rubric.md) · [Pet portraits](references/animal-and-pet-recipes.md) · [Charts and tables](references/data-chart-and-table-recipes.md)
+Detailed rules: [SKILL.md](SKILL.md) · [Style DNA](references/style-dna.md) · [Quality rubric](references/quality-rubric.md) · [Creator introduction](references/editorial-and-cover-recipes.md#creator-introduction-card) · [Pet portraits](references/animal-and-pet-recipes.md) · [Charts and tables](references/data-chart-and-table-recipes.md)
 
 ## 验证 / Validation
 

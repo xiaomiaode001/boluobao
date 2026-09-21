@@ -438,13 +438,14 @@ def validate(root: Path) -> list[str]:
                 "platform-cover-set",
                 "image-style-reconstruction",
                 "pet-portrait-reconstruction",
+                "creator-introduction-card",
                 "data-bar-chart",
                 "compact-data-table",
                 "multilingual-handwritten-note",
             }
             case_ids = {case.get("id") for case in cases}
-            if len(cases) != 9 or case_ids != expected_case_ids:
-                failures.append("invocation cases must contain the nine maintained routing scenarios")
+            if len(cases) != 10 or case_ids != expected_case_ids:
+                failures.append("invocation cases must contain the ten maintained routing scenarios")
             case_by_id = {case.get("id"): case for case in cases}
             generic = case_by_id.get("generic-social-cover", {})
             if generic.get("expected_ratio") != "4:5":
@@ -491,6 +492,49 @@ def validate(root: Path) -> list[str]:
             }
             if not required_pet_avoids.issubset(set(pet.get("must_avoid", []))):
                 failures.append("pet portrait exclusions are incomplete")
+            creator = case_by_id.get("creator-introduction-card", {})
+            if (
+                creator.get("expected_entry") != "text-to-cover"
+                or creator.get("expected_mode") != "creator-introduction-card"
+                or creator.get("expected_count") != 1
+                or creator.get("expected_ratio") != "9:16"
+                or creator.get("maximum_targeted_corrections") != 1
+            ):
+                failures.append("creator introduction must route to one exact-ratio card")
+            required_creator_reads = {
+                "references/editorial-and-cover-recipes.md",
+                "references/handwriting-and-letter-recipes.md",
+                "references/character-and-portrait-recipes.md",
+            }
+            if not required_creator_reads.issubset(set(creator.get("must_read", []))):
+                failures.append("creator introduction references are incomplete")
+            required_creator_preserve = {
+                "identity",
+                "pose",
+                "hand_prop_relationship",
+                "clothing_graphic_placement",
+                "clothing_graphic_structure",
+            }
+            if not required_creator_preserve.issubset(set(creator.get("must_preserve", []))):
+                failures.append("creator introduction portrait locks are incomplete")
+            creator_text = creator.get("must_lock_text", [])
+            expected_creator_text = [
+                "欢迎来到「灵感实验室」。",
+                "这里记录 AI、设计与生活的实践。",
+                "AI 是工具，生活是目的。",
+                "通过邮箱和后台私信联系。",
+                "邮箱：creator@example.com",
+            ]
+            if creator_text != expected_creator_text or creator.get("must_lock_email") != "creator@example.com":
+                failures.append("creator introduction exact-text locks are incomplete")
+            if not {
+                "footer-over-garment",
+                "broken-email",
+                "invented-handle",
+                "generic-shirt-logo",
+                "pseudo-writing",
+            }.issubset(set(creator.get("must_avoid", []))):
+                failures.append("creator introduction exclusions are incomplete")
             chart = case_by_id.get("data-bar-chart", {})
             if chart.get("expected_mode") != "data-chart" or chart.get("expected_ratio") != "16:9":
                 failures.append("bar-chart request must route to one 16:9 data chart")

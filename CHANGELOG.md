@@ -4,11 +4,13 @@
 
 ### Added
 
+- Added a creator-introduction card route for portrait-plus-copy visuals, including explicit `9:16` handling, protected garment graphics, contact-safe composition, and a privacy-safe text-only regression.
 - Added a reusable pet-portrait reconstruction route with explicit eye, muzzle, ear, coat-zone, pose, expression, paw-ownership, and subject-identity locks.
 - Added a pet-specific recipe, visual quality gate, and text-only invocation regression without publishing the source or generated pet imagery.
 
 ### Changed
 
+- Refined directional paper-and-pencil texture, mixed Chinese/Latin handwriting, atomic email verification, and post-correction checks against footer overlap.
 - Pet eyes now favor matte pencil fields, sparse irregular iris marks, and small paper catchlights instead of glossy optics or anime enlargement.
 - Pet faces and coats now use 3–7 diagnostic color or value zones, broad directional masses, representative tufts, stronger outer/interior line hierarchy, and only one or two safe asymmetries.
 - Updated Codex and Claude Code discovery text, the bilingual README, the base quality rubric, and maintained package validation for the new route.

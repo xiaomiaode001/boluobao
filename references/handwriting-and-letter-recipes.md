@@ -57,6 +57,15 @@ If the user requests several languages on one page:
 - use one neutral shared motif to connect the blocks when useful, but do not use flags, flag colors, national costumes, or culturally stereotyped symbols unless requested;
 - preserve each script's own proportions instead of forcing Chinese square structure, Japanese kana rhythm, and Latin x-height into one common glyph system.
 
+## Mixed-script copy and contact details
+
+For a creator introduction or other text-led visual, a Chinese sentence may contain Latin names, acronyms, and contact details without becoming a separate typography system.
+
+- Lock each Latin token independently, including case and spacing: `AI`, `GEO`, and a product or community name are not decorative glyphs. Keep them legible within the same pen-pressure family as the Chinese line.
+- Treat an email address as one atomic text field. Verify every character, digit, `@`, dot, domain, and local-part order; do not wrap it in the middle, add spaces or hyphens, or over-distort its x-height and slant. A source `\@` used as a Markdown escape represents a literal `@`, not a backslash in the address.
+- Give practical contact copy quieter handwriting and more stable baselines than an expressive title. Keep it on the same paper surface with enough contrast and edge space for mobile reading.
+- For user-requested longer in-image copy, compose a small number of readable blocks and proofread each one. If one surgical correction still leaves protected copy wrong, deliver the verified wording separately with a clean open text zone; never call approximate image text exact.
+
 ## Prompt scaffold
 
 ```text

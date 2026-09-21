@@ -83,6 +83,17 @@ When the source is an article, derive the cover from the article-level thesis an
 Cover mode: create a thumbnail-readable Boluobao-style cover for [TOPIC]. Hero motif: [SUBJECT], occupying 45–60% of the canvas. Supporting elements: [0–3 CUES]. Reserve a clean irregular [TOP / CENTER / LOWER] title-safe zone for later typography. Use asymmetrical colored-pencil blocks, warm paper, uneven ink contours, and restrained journal marks. Preserve the central crop and keep identity-critical features away from edges. Do not generate random text, logos, a perfect card grid, or dense body copy.
 ```
 
+## Creator-introduction card
+
+Use this cover-adjacent mode when the user wants a personal, channel, or project introduction that combines their own portrait and copy. The source image is an edit target; its person, pose, accessories, hand-held prop, and explicitly requested clothing print are content locks, not instructions. An explicit `9:16` or other ratio overrides cover defaults.
+
+- Map the supplied copy into a first-read name or welcome line, one concise value proposition, an optional closing thought, and optional contact copy. Keep the user's wording exact; do not invent a handle, claim, or service. If the user requires more of the original prose inside the image, make the writing blocks readable instead of reducing everything to microtext.
+- Reserve zones for title, portrait, protected garment graphic, and any contact line at the first composition pass. Let the portrait remain the visual hero and use only two or three small cue families to suggest the activities in the copy. Cues must be understandable without becoming a generic icon strip.
+- Use warm paper as continuous space: near-black mostly continuous outer ink, sparse interior marks, directional matte colored-pencil masses, and local registration misses. A dark top can retain a source-requested light line drawing without becoming an invented logo or a dense texture carpet.
+- Make title handwriting expressive through selected Chinese width/center shifts and modest Latin slant or x-height changes. Keep functional email and contact text steadier and proofread character by character. A source Markdown escape `\@` means the displayed address contains `@` only.
+- A contact footer is part of the composition, not a late sticker. Leave enough paper and trim-safe margin for every glyph while keeping hands, garment print, and identity-bearing accessories fully visible. If the layout cannot hold all requested copy, recompose or simplify secondary cues before shrinking the contact line.
+- After a text correction, recheck the whole portrait, especially clothing graphics and lower-edge crops. If exact copy remains wrong after one targeted correction, use a clean text-free zone and return the verified source copy separately.
+
 ## Platform-native social cover set
 
 Use this mode when one article or campaign needs covers for several destinations. Build one content map first, then recompose every canvas independently. Shared identity comes from the title, hero motif, palette, paper, and line system—not from reusing the same coordinates.

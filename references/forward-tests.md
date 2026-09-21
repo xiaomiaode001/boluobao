@@ -13,6 +13,7 @@ Use these boundaries only after changing shared style, routing, text, or validat
 | English letter | `letter-english-v2.png` | 19 | uniform x-height/slant or ambiguous letterforms |
 | Multilingual note | `docs/showcase/trilingual-ai-friends-note.webp` | 19 | unequal language hierarchy, Japanese mark loss, mixed-script token drift, flag stereotypes |
 | Character card | `character-podcast-v1.png` | 19 | filtered-photo anatomy, dark garment carpet, hand errors |
+| Creator introduction | `invocation-cases.json#creator-introduction-card` (behavioral regression; no personal media retained) | rule-only | punctuation drift, broken email, late footer covering a requested shirt graphic |
 | Pet portrait | `invocation-cases.json#pet-portrait-reconstruction` (behavioral regression; no public media retained) | rule-only | glossy eyes, hair-by-hair fur, generic cartoon face, identity drift |
 | Landmark | `landmark-loose-v3.png` | 19 | centered postcard symmetry or complete secondary geometry |
 | Manuscript story | `text-manuscript-loose-v3.png` | 19 | equal beat completion, wrong chronology, invented events |
@@ -40,6 +41,7 @@ The 18-point assets are structural or semantic baselines, not line-and-finish go
 - Manuscript pages develop only the emotional-turn beat; at least two secondary beats stay below half its information.
 - Close-up people protect faces and hands while moving irregularity to hair, clothing, furniture, props, and incomplete background fragments.
 - Pet portraits lock gaze, pupil shape, muzzle, ears, pose, expression, and 3–7 coat zones; personality comes from matte irises, representative fur, line hierarchy, and one or two safe asymmetries rather than glossy eyes, hair-by-hair rendering, or caricature.
+- A source-requested clothing print is a portrait content lock: keep its placement and legible diagnostic structure, and reserve contact space before generation so a later footer cannot crop it.
 
 ### Text and content
 
@@ -49,6 +51,7 @@ The 18-point assets are structural or semantic baselines, not line-and-finish go
 - Article frames preserve source roles and one changing anchor. They do not invent facts, statistics, people, products, interfaces, or conclusions.
 - Covers are independently recomposed for each ratio and never created by crop, pad, stretch, or letterbox reuse.
 - Charts and tables protect every value, unit, order, encoding, and cell relationship. Their irregularity belongs only on harmless lines, fills, spacing, and paper.
+- Person-led introduction cards proofread Chinese/Latin copy and an optional email independently. Keep `@` literal, the address unbroken, and contact copy within a quiet paper zone; recheck portrait details after any text edit.
 
 ## Retest protocol
 

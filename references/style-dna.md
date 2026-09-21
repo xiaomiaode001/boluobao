@@ -11,6 +11,7 @@ A warm, handmade travel notebook: observational rather than polished, graphic ra
 - Fill medium: colored pencil, wax crayon, or dry felt marker. Coverage is translucent and streaky; paper tooth remains visible.
 - Shadow: one muted lavender-gray, dusty rose, or warm brown patch offset beneath an object. Shadows are graphic stains, not physically accurate lighting.
 - Finish: matte, analog, slightly faded. No glossy highlights, bloom, plastic surfaces, or digitally perfect gradients.
+- In a portrait-led introduction, let broad directional pencil strokes describe dark fabric, hair, or a single accent object. Keep paper tooth active inside color masses; do not substitute a page-wide grain filter or equal-density micro-hatching for drawn form.
 
 ## Line system
 
@@ -26,6 +27,7 @@ A warm, handmade travel notebook: observational rather than polished, graphic ra
 - Treat continuity as the default and interruption as an event. A long contour receives at most one restart or correction in a local region; the echo line should cover less than roughly 15% of that contour.
 - Keep the silhouette and vessel-defining edges visibly darker and heavier than folds, ingredient separations, hatching, and material texture. Interior marks should recede at first glance.
 - Never build an edge from evenly spaced dashes, beads, hash marks, or repeated micro-gaps. Never trace a second line around the full perimeter. Paper tooth and colored-pencil grain create texture; the ink line itself must not become a uniform dotted or stitched texture.
+- A dark garment, hand-held prop, and handwritten text need different weights: confident outer contour first, sparse structural interior marks second, dry-pencil texture last. Texture must not compete with a requested garment print or the person's face.
 - Use interior ink only for diagnostic structure. On repeated foods, draw a representative subset of pleats, kernels, noodle strands, seeds, layers, or garnish; let colored-pencil blocks carry the remaining material information.
 - On bowls, plates, cups, and steamers, draw only structural rings that explain rim, opening, wall, or base. Omit redundant concentric tracings and decorative bands that do not clarify construction.
 
@@ -61,6 +63,7 @@ Color registration is intentionally imperfect. Some small zones should remain un
 - Build an irregular two-column or scattered-grid rhythm. Align by eye, not by ruler.
 - Alternate large hero sketches with small icons, arrows, speech bubbles, ribbons, prices, or short comments.
 - Text and image should interlock: notes tuck beside silhouettes, wrap around bowls, or point toward details.
+- When contact copy belongs in a person-led poster, reserve its quiet paper zone during composition. Integrate it with the same sheet and spacing rhythm; do not paste a new opaque footer across the portrait or an identity-bearing clothing detail.
 - Dense pages still need 8–15% quiet space. Do not fill every gap with decoration.
 - A clean single-subject output may omit the notebook-page layout while preserving paper, line, fill, and shadow behavior.
 - Keep one mildly awkward relationship: a note almost touching an object, one unusually wide gap, a cropped doodle, or a cluster that sits off-center. Balance the page by eye without correcting every tension.

@@ -79,6 +79,43 @@
       "maximum_targeted_corrections": 1
     },
     {
+      "id": "creator-introduction-card",
+      "request": "用 boluobao 把我的头像和文字做成 9:16 创作者介绍图：欢迎来到「灵感实验室」。这里记录 AI、设计与生活的实践。AI 是工具，生活是目的。底部写“通过邮箱和后台私信联系。”与“邮箱：creator@example.com”，并保留原图人物的姿势、手中的杯子和衣服上的线描图案。",
+      "expected_entry": "text-to-cover",
+      "expected_mode": "creator-introduction-card",
+      "expected_count": 1,
+      "expected_ratio": "9:16",
+      "must_read": [
+        "references/editorial-and-cover-recipes.md",
+        "references/handwriting-and-letter-recipes.md",
+        "references/character-and-portrait-recipes.md"
+      ],
+      "must_preserve": [
+        "identity",
+        "pose",
+        "hand_prop_relationship",
+        "clothing_graphic_placement",
+        "clothing_graphic_structure"
+      ],
+      "must_lock_text": [
+        "欢迎来到「灵感实验室」。",
+        "这里记录 AI、设计与生活的实践。",
+        "AI 是工具，生活是目的。",
+        "通过邮箱和后台私信联系。",
+        "邮箱：creator@example.com"
+      ],
+      "must_lock_email": "creator@example.com",
+      "must_avoid": [
+        "footer-over-garment",
+        "broken-email",
+        "invented-handle",
+        "generic-shirt-logo",
+        "dense-garment-texture",
+        "pseudo-writing"
+      ],
+      "maximum_targeted_corrections": 1
+    },
+    {
       "id": "data-bar-chart",
       "request": "用 boluobao 将这些数据做成柱状图：立即 62%，短思考 74%，深思考 86%。",
       "expected_entry": "text-or-data-to-graphic",
